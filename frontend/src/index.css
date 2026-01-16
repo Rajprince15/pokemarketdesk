@@ -1,116 +1,66 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @layer base {
   :root {
-    /* Light Mode - Pokemon Theme */
-    --background: 210 17% 98%;
-    --foreground: 222 47% 11%;
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 222 47% 8%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 45 100% 51%; /* Pokemon Yellow #FFCB05 */
-    --primary-foreground: 222 47% 11%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 222 47% 6%;
 
-    --secondary: 212 76% 44%; /* Poke Blue #2A75BB */
+    --secondary: 222 47% 12%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 17% 95%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 222 47% 14%;
+    --muted-foreground: 215 20% 55%;
 
-    --accent: 4 90% 58%; /* Pokemon Red #E3350D */
-    --accent-foreground: 210 40% 98%;
+    --accent: 45 93% 58%;
+    --accent-foreground: 222 47% 6%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
     --success: 142 71% 45%;
-    --success-foreground: 210 40% 98%;
+    --success-foreground: 222 47% 6%;
 
-    --warning: 38 92% 50%;
-    --warning-foreground: 222 47% 11%;
-
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 45 100% 51%;
+    --border: 222 47% 16%;
+    --input: 222 47% 16%;
+    --ring: 199 89% 48%;
 
     --radius: 0.75rem;
 
-    /* Custom gradients - Light */
-    --gradient-hero: linear-gradient(135deg, #F8F9FA 0%, #E8EAED 100%);
-    --gradient-card: linear-gradient(145deg, #FFFFFF 0%, #F8F9FA 100%);
-    --gradient-primary: linear-gradient(135deg, #FFCB05 0%, #FFB300 100%);
-    --gradient-accent: linear-gradient(135deg, #E3350D 0%, #C62828 100%);
-    --gradient-secondary: linear-gradient(135deg, #2A75BB 0%, #1E5A9A 100%);
+    /* Custom gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(222 47% 8%) 0%, hsl(222 47% 4%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(222 47% 10%) 0%, hsl(222 47% 6%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(199 89% 48%) 0%, hsl(199 89% 38%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(45 93% 58%) 0%, hsl(35 93% 48%) 100%);
     
     /* Pokemon type colors */
-    --type-fire: 14 100% 57%;
+    --type-fire: 25 95% 53%;
     --type-water: 199 89% 48%;
     --type-grass: 142 71% 45%;
     --type-electric: 45 93% 58%;
     --type-psychic: 300 60% 60%;
     --type-dragon: 260 70% 55%;
 
-    /* Shadows - Light */
-    --shadow-glow: 0 0 40px rgba(255, 203, 5, 0.3);
-    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 8px 32px rgba(255, 203, 5, 0.2);
+    /* Shadows */
+    --shadow-glow: 0 0 40px hsl(199 89% 48% / 0.15);
+    --shadow-card: 0 4px 24px hsl(222 47% 2% / 0.5);
   }
 
   .dark {
-    /* Dark Mode - Pokemon Theme */
     --background: 222 47% 6%;
     --foreground: 210 40% 98%;
-
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 45 100% 51%; /* Pokemon Yellow #FFCB05 */
-    --primary-foreground: 222 47% 11%;
-
-    --secondary: 213 94% 68%; /* Lighter Blue for dark mode */
-    --secondary-foreground: 222 47% 11%;
-
-    --muted: 222 47% 14%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 0 84% 60%; /* Lighter Red for dark mode */
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
-
-    --success: 142 71% 45%;
-    --success-foreground: 210 40% 98%;
-
-    --warning: 38 92% 50%;
-    --warning-foreground: 222 47% 11%;
-
-    --border: 222 47% 16%;
-    --input: 222 47% 16%;
-    --ring: 45 100% 51%;
-
-    /* Custom gradients - Dark */
-    --gradient-hero: linear-gradient(135deg, #0F172A 0%, #0A0F1E 100%);
-    --gradient-card: linear-gradient(145deg, #1E293B 0%, #0F172A 100%);
-    --gradient-primary: linear-gradient(135deg, #FFCB05 0%, #FFB300 100%);
-    --gradient-accent: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-    --gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
-
-    /* Shadows - Dark */
-    --shadow-glow: 0 0 40px rgba(255, 203, 5, 0.2);
-    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.5);
-    --shadow-hover: 0 8px 32px rgba(255, 203, 5, 0.3);
   }
 }
 
@@ -122,16 +72,6 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  /* Smooth theme transitions */
-  *,
-  *::before,
-  *::after {
-    transition-property: background-color, border-color, color, fill, stroke;
-    transition-duration: 0.3s;
-    transition-timing-function: ease;
   }
 }
 
@@ -146,29 +86,12 @@
     background-image: var(--gradient-accent);
   }
 
-  .text-gradient-secondary {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-secondary);
-  }
-
   .bg-gradient-hero {
     background: var(--gradient-hero);
   }
 
   .bg-gradient-card {
     background: var(--gradient-card);
-  }
-
-  .bg-gradient-primary {
-    background: var(--gradient-primary);
-  }
-
-  .bg-gradient-accent {
-    background: var(--gradient-accent);
-  }
-
-  .bg-gradient-secondary {
-    background: var(--gradient-secondary);
   }
 
   .shadow-glow {
@@ -178,16 +101,12 @@
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
-
-  .shadow-hover {
-    box-shadow: var(--shadow-hover);
-  }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -196,43 +115,9 @@
 
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--muted));
-  border-radius: 5px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground));
-}
-
-/* Animations */
-@keyframes bounce-in {
-  0% {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes slide-up {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.animate-bounce-in {
-  animation: bounce-in 0.5s ease-out;
-}
-
-.animate-slide-up {
-  animation: slide-up 0.4s ease-out;
 }

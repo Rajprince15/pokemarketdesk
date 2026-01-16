@@ -1,12 +1,9 @@
-import { Search, Menu, Star, ShoppingCart, Zap, User, LogOut, Newspaper, Target, Sparkles, Package, Store, GitCompare } from "lucide-react";
+import { Search, Menu, Star, TrendingUp, Zap, User, LogOut, Newspaper, Target, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
-import { useCart } from "@/contexts/CartContext";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,11 +21,9 @@ import {
 } from "@/components/ui/sheet";
 
 export const Header = () => {
-  const { user, isLoggedIn, logout } = useAuth();
-  const { getTotalItems } = useCart();
+  const { user, isLoggedIn, login, logout } = useAuth();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const cartItems = getTotalItems();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -44,7 +39,7 @@ export const Header = () => {
         </Link>
 
         {/* Navigation */}
-        <nav className="hidden lg:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-6">
           <Link to="/cards" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
             <Sparkles className="h-4 w-4" />
             All Cards
@@ -57,34 +52,21 @@ export const Header = () => {
             <Star className="h-4 w-4" />
             Watchlist
           </Link>
-          <Link to="/sell" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            <Store className="h-4 w-4" />
-            Sell
+          <Link to="/news" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            <Newspaper className="h-4 w-4" />
+            News
           </Link>
         </nav>
 
         {/* Search & Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Theme Toggle */}
-          <ThemeToggle />
-
-          {/* Cart Button */}
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="relative"
-            onClick={() => navigate('/cart')}
-          >
-            <ShoppingCart className="h-5 w-5" />
-            {cartItems > 0 && (
-              <Badge 
-                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
-                variant="destructive"
-              >
-                {cartItems}
-              </Badge>
-            )}
-          </Button>
+        <div className="flex items-center gap-3">
+          <div className="relative hidden sm:block">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              placeholder="Search cards..."
+              className="w-64 pl-9 bg-secondary/50 border-border/50 focus:border-primary/50 focus:ring-primary/20"
+            />
+          </div>
 
           {isLoggedIn && user ? (
             <DropdownMenu>
@@ -110,25 +92,13 @@ export const Header = () => {
                   </div>
                 </div>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => navigate('/profile')}>
+                <DropdownMenuItem>
                   <User className="mr-2 h-4 w-4" />
                   Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/collection')}>
-                  <Package className="mr-2 h-4 w-4" />
-                  My Collection
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/orders')}>
-                  <ShoppingCart className="mr-2 h-4 w-4" />
-                  My Orders
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => navigate('/watchlist')}>
                   <Star className="mr-2 h-4 w-4" />
                   Watchlist ({user.watchlist.length})
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/compare')}>
-                  <GitCompare className="mr-2 h-4 w-4" />
-                  Compare Cards
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={logout} className="text-destructive">
@@ -138,7 +108,7 @@ export const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button size="sm" className="hidden sm:flex" onClick={() => navigate('/profile')}>
+            <Button size="sm" className="hidden sm:flex" onClick={login}>
               Sign In
             </Button>
           )}
@@ -146,7 +116,7 @@ export const Header = () => {
           {/* Mobile Menu */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden">
+              <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
@@ -162,8 +132,19 @@ export const Header = () => {
                 </SheetTitle>
               </SheetHeader>
 
+              {/* Mobile Search */}
+              <div className="mt-6 mb-6">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    placeholder="Search cards..."
+                    className="pl-9 bg-secondary/50 border-border/50"
+                  />
+                </div>
+              </div>
+
               {/* Mobile Navigation */}
-              <nav className="flex flex-col gap-2 mt-6">
+              <nav className="flex flex-col gap-2">
                 <Link 
                   to="/cards" 
                   className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary/50 transition-colors"
@@ -189,20 +170,12 @@ export const Header = () => {
                   <span className="font-medium">Watchlist</span>
                 </Link>
                 <Link 
-                  to="/sell" 
+                  to="/news" 
                   className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary/50 transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <Store className="h-5 w-5 text-primary" />
-                  <span className="font-medium">Sell</span>
-                </Link>
-                <Link 
-                  to="/compare" 
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-secondary/50 transition-colors"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <GitCompare className="h-5 w-5 text-primary" />
-                  <span className="font-medium">Compare Cards</span>
+                  <Newspaper className="h-5 w-5 text-primary" />
+                  <span className="font-medium">News</span>
                 </Link>
               </nav>
 
@@ -226,34 +199,12 @@ export const Header = () => {
                       variant="ghost" 
                       className="w-full justify-start px-4"
                       onClick={() => {
-                        navigate('/profile');
+                        navigate('/watchlist');
                         setMobileMenuOpen(false);
                       }}
                     >
-                      <User className="mr-2 h-4 w-4" />
-                      Profile
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      className="w-full justify-start px-4"
-                      onClick={() => {
-                        navigate('/collection');
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      <Package className="mr-2 h-4 w-4" />
-                      My Collection
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      className="w-full justify-start px-4"
-                      onClick={() => {
-                        navigate('/orders');
-                        setMobileMenuOpen(false);
-                      }}
-                    >
-                      <ShoppingCart className="mr-2 h-4 w-4" />
-                      My Orders
+                      <Star className="mr-2 h-4 w-4" />
+                      Watchlist ({user.watchlist.length})
                     </Button>
                     <Button 
                       variant="ghost" 
@@ -271,7 +222,7 @@ export const Header = () => {
                   <Button 
                     className="w-full" 
                     onClick={() => {
-                      navigate('/profile');
+                      login();
                       setMobileMenuOpen(false);
                     }}
                   >
