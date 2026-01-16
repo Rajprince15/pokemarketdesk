@@ -44,24 +44,24 @@ const stats = [
 
 export const MarketStats = () => {
   return (
-    <section className="py-6 border-b border-border/50">
+    <section className="py-6 border-b border-border/30">
       <div className="container">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-gradient-card border border-border/50 hover:border-primary/30 transition-all duration-300 animate-fade-in"
+              className="flex items-center gap-3 p-4 sm:p-5 rounded-xl glass border border-border/50 hover:border-primary/30 hover:glow-hover transition-all duration-300 animate-fade-in card-hover"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 flex-shrink-0">
-                <stat.icon className="h-5 w-5 text-primary" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex-shrink-0 shadow-lg">
+                <stat.icon className="h-6 w-6 text-primary" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs text-muted-foreground truncate">{stat.label}</p>
+                <p className="text-xs text-muted-foreground truncate font-medium">{stat.label}</p>
                 <div className="flex items-baseline gap-1.5 flex-wrap">
-                  <span className="text-base sm:text-lg font-semibold">{stat.value}</span>
+                  <span className="text-lg sm:text-xl font-bold">{stat.value}</span>
                   <span
-                    className={`text-xs font-medium ${
+                    className={`text-xs font-semibold ${
                       stat.positive ? "text-success" : "text-destructive"
                     }`}
                   >

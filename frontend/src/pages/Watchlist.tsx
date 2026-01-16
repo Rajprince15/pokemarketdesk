@@ -12,16 +12,15 @@ const Watchlist = () => {
 
   if (!isLoggedIn || !user) {
     return (
-      <div className="min-h-screen bg-gradient-hero">
+      <div className="min-h-screen bg-gradient-hero bg-gradient-mesh grain relative">
         <Header />
-        <main className="container py-6 sm:py-8 px-4">
-          <Link to="/">
+        <main className="container py-6 sm:py-8 px-4 relative z-10">\n          <Link to="/">
             <Button variant="ghost" className="mb-4 sm:mb-6" size="sm">
               <ArrowLeft className="h-4 w-4 mr-2" />
               Back to Home
             </Button>
           </Link>
-          <div className="bg-secondary/30 rounded-xl p-8 sm:p-12 text-center max-w-2xl mx-auto">
+          <div className="glass rounded-2xl p-8 sm:p-12 text-center max-w-2xl mx-auto border border-border/50">
             <Eye className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-4 text-muted-foreground" />
             <h2 className="text-xl sm:text-2xl font-bold mb-2">Sign in to view your watchlist</h2>
             <p className="text-sm sm:text-base text-muted-foreground">Track your favorite Pokemon cards and monitor their performance</p>
@@ -37,9 +36,9 @@ const Watchlist = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero bg-gradient-mesh grain relative">
       <Header />
-      <main className="container py-6 sm:py-8 px-4">
+      <main className="container py-6 sm:py-8 px-4 relative z-10">
         <Link to="/">
           <Button variant="ghost" className="mb-4 sm:mb-6" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -48,7 +47,7 @@ const Watchlist = () => {
         </Link>
 
         <div className="flex items-center gap-3 mb-6 sm:mb-8 flex-wrap">
-          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-accent/10">
+          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-primary/20 shadow-lg">
             <Star className="h-5 w-5 sm:h-6 sm:w-6 text-accent fill-current" />
           </div>
           <div>
@@ -60,7 +59,7 @@ const Watchlist = () => {
         </div>
 
         {watchlistCards.length === 0 ? (
-          <div className="bg-secondary/30 rounded-xl p-8 sm:p-12 text-center">
+          <div className="glass rounded-2xl p-8 sm:p-12 text-center border border-border/50">
             <Star className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-4 text-muted-foreground" />
             <h2 className="text-lg sm:text-xl font-semibold mb-2">No cards in your watchlist yet</h2>
             <p className="text-sm sm:text-base text-muted-foreground mb-6">Start tracking cards to monitor their performance</p>
@@ -73,7 +72,7 @@ const Watchlist = () => {
             {watchlistCards.map((card) => (
               <div
                 key={card.id}
-                className="group relative bg-gradient-to-br from-secondary/50 to-secondary/30 rounded-xl p-4 sm:p-6 border border-border/50 hover:border-primary/50 transition-all duration-300"
+                className="group relative glass rounded-2xl p-4 sm:p-6 border border-border/50 hover:border-primary/50 card-hover transition-all duration-300"
               >
                 <Button
                   variant="ghost"

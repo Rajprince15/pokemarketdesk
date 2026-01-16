@@ -2,6 +2,7 @@ import { Search, Menu, Star, TrendingUp, Zap, User, LogOut, Newspaper, Target, S
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
@@ -26,15 +27,15 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/50 glass-strong">
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
-            <Zap className="h-5 w-5 text-primary-foreground" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg">
+            <Zap className="h-5 w-5 text-white" />
           </div>
-          <span className="text-xl font-bold tracking-tight">
-            Poke<span className="text-primary">Market</span>
+          <span className="text-xl font-bold tracking-tight hidden sm:block">
+            Poke<span className="text-gradient-primary">Market</span>
           </span>
         </Link>
 
@@ -59,14 +60,17 @@ export const Header = () => {
         </nav>
 
         {/* Search & Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <div className="relative hidden sm:block">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search cards..."
-              className="w-64 pl-9 bg-secondary/50 border-border/50 focus:border-primary/50 focus:ring-primary/20"
+              className="w-48 lg:w-64 pl-9 glass border-border/50 focus:border-primary/50 focus:ring-primary/20"
             />
           </div>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
 
           {isLoggedIn && user ? (
             <DropdownMenu>
@@ -138,9 +142,15 @@ export const Header = () => {
                   <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     placeholder="Search cards..."
-                    className="pl-9 bg-secondary/50 border-border/50"
+                    className="pl-9 glass border-border/50"
                   />
                 </div>
+              </div>
+
+              {/* Theme Toggle in Mobile */}
+              <div className="mb-4 flex items-center justify-between px-4">
+                <span className="text-sm font-medium">Theme</span>
+                <ThemeToggle />
               </div>
 
               {/* Mobile Navigation */}

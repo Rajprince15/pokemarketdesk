@@ -77,9 +77,9 @@ const AllCards = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero bg-gradient-mesh grain relative">
       <Header />
-      <main className="container py-6 sm:py-8 px-4">
+      <main className="container py-6 sm:py-8 px-4 relative z-10">
         <Link to="/">
           <Button variant="ghost" className="mb-4 sm:mb-6" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -88,7 +88,7 @@ const AllCards = () => {
         </Link>
 
         <div className="flex items-center gap-3 mb-6 sm:mb-8 flex-wrap">
-          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-primary/10">
+          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 shadow-lg">
             <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
           </div>
           <div>
@@ -98,7 +98,7 @@ const AllCards = () => {
         </div>
 
         {/* Search and Filter Section */}
-        <div className="bg-card/50 border border-border/50 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+        <div className="glass rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 border border-border/50">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {/* Search */}
             <div className="sm:col-span-2">
@@ -108,7 +108,7 @@ const AllCards = () => {
                   placeholder="Search by name or set..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10"
+                  className="pl-10 glass"
                 />
               </div>
             </div>
@@ -189,7 +189,7 @@ const AllCards = () => {
 
         {/* Cards Grid */}
         {filteredCards.length === 0 ? (
-          <div className="bg-secondary/30 rounded-xl p-8 sm:p-12 text-center">
+          <div className="glass rounded-2xl p-8 sm:p-12 text-center border border-border/50">
             <Search className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-4 text-muted-foreground" />
             <h2 className="text-lg sm:text-xl font-semibold mb-2">No cards found</h2>
             <p className="text-sm sm:text-base text-muted-foreground mb-6">Try adjusting your search or filters</p>
@@ -200,7 +200,7 @@ const AllCards = () => {
             {filteredCards.map((card) => (
               <div
                 key={card.id}
-                className="group relative bg-gradient-to-br from-secondary/50 to-secondary/30 rounded-xl p-4 sm:p-5 border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+                className="group relative glass rounded-2xl p-4 sm:p-5 border border-border/50 hover:border-primary/50 card-hover transition-all duration-300"
               >
                 <Button
                   variant="ghost"
@@ -218,7 +218,7 @@ const AllCards = () => {
                 </Button>
 
                 {card.trending && (
-                  <Badge className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-accent/90 text-white text-[10px] sm:text-xs">
+                  <Badge className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-destructive/90 text-white text-[10px] sm:text-xs shadow-lg">
                     Trending
                   </Badge>
                 )}

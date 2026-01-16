@@ -134,9 +134,9 @@ const Predictions = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero bg-gradient-mesh grain relative">
       <Header />
-      <main className="container py-6 sm:py-8 px-4">
+      <main className="container py-6 sm:py-8 px-4 relative z-10">
         <Link to="/">
           <Button variant="ghost" className="mb-4 sm:mb-6" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -145,7 +145,7 @@ const Predictions = () => {
         </Link>
 
         <div className="flex items-center gap-3 mb-6 sm:mb-8 flex-wrap">
-          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-accent/10">
+          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-accent/20 to-destructive/20 shadow-lg">
             <Target className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
           </div>
           <div>
@@ -155,7 +155,7 @@ const Predictions = () => {
         </div>
 
         {/* Info Banner */}
-        <div className="bg-primary/10 border border-primary/20 rounded-xl p-3 sm:p-4 mb-6 sm:mb-8 flex items-start gap-2 sm:gap-3">
+        <div className="glass border border-primary/20 rounded-2xl p-3 sm:p-4 mb-6 sm:mb-8 flex items-start gap-2 sm:gap-3">
           <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-0.5 flex-shrink-0" />
           <div>
             <p className="text-xs sm:text-sm font-medium mb-1">Algorithmic Predictions</p>
@@ -168,7 +168,7 @@ const Predictions = () => {
 
         {/* Summary Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
-          <div className="bg-success/10 border border-success/20 rounded-xl p-4 sm:p-5">
+          <div className="glass border border-success/30 rounded-2xl p-4 sm:p-5">
             <div className="flex items-center gap-2 mb-2">
               <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-success" />
               <h3 className="text-sm sm:text-base font-semibold text-success">Buy Signals</h3>
@@ -177,7 +177,7 @@ const Predictions = () => {
             <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">Cards showing upward momentum</p>
           </div>
 
-          <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-4 sm:p-5">
+          <div className="glass border border-destructive/30 rounded-2xl p-4 sm:p-5">
             <div className="flex items-center gap-2 mb-2">
               <TrendingDown className="h-4 w-4 sm:h-5 sm:w-5 text-destructive" />
               <h3 className="text-sm sm:text-base font-semibold text-destructive">Sell Signals</h3>
@@ -186,7 +186,7 @@ const Predictions = () => {
             <p className="text-[10px] sm:text-xs text-muted-foreground mt-1">Cards showing downward trends</p>
           </div>
 
-          <div className="bg-secondary/50 border border-border/50 rounded-xl p-4 sm:p-5">
+          <div className="glass border border-border/50 rounded-2xl p-4 sm:p-5">
             <div className="flex items-center gap-2 mb-2">
               <Minus className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground" />
               <h3 className="text-sm sm:text-base font-semibold">Hold Signals</h3>
@@ -201,7 +201,7 @@ const Predictions = () => {
           {predictions.map((prediction) => (
             <div
               key={prediction.card.id}
-              className="bg-card/50 border border-border/50 rounded-xl p-4 sm:p-6 hover:border-primary/30 transition-all"
+              className="glass border border-border/50 rounded-2xl p-4 sm:p-6 hover:border-primary/30 transition-all"
             >
               <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
                 {/* Card Image */}

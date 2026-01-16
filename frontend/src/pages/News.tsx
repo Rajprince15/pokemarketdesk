@@ -126,9 +126,9 @@ const News = () => {
     : newsData.filter(news => news.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero bg-gradient-mesh grain relative">
       <Header />
-      <main className="container py-6 sm:py-8 px-4">
+      <main className="container py-6 sm:py-8 px-4 relative z-10">
         <Link to="/">
           <Button variant="ghost" className="mb-4 sm:mb-6" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -137,7 +137,7 @@ const News = () => {
         </Link>
 
         <div className="flex items-center gap-3 mb-6 sm:mb-8 flex-wrap">
-          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-primary/10">
+          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 shadow-lg">
             <Newspaper className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
           </div>
           <div>
@@ -181,7 +181,7 @@ const News = () => {
             return (
               <div
                 key={news.id}
-                className={`group cursor-pointer bg-gradient-to-br from-secondary/50 to-secondary/30 rounded-xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-300 ${
+                className={`group cursor-pointer glass rounded-2xl overflow-hidden border border-border/50 hover:border-primary/50 card-hover transition-all duration-300 ${
                   news.featured ? "lg:col-span-2" : ""
                 }`}
               >

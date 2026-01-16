@@ -11,13 +11,10 @@ import { Sparkles, Target, Star, Newspaper, ArrowRight } from "lucide-react";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero bg-gradient-mesh grain relative">
       <Header />
-      <main className="px-4">
+      <main className="px-4 relative z-10">
         <MarketStats />
-
-        
-
         <TrendingCards />
         <WatchlistSection />
         <NewsSection />
