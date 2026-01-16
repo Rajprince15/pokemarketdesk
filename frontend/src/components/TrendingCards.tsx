@@ -35,15 +35,23 @@ export const TrendingCards = () => {
           {trendingCards.map((card, index) => (
             <div
               key={card.id}
-              className="group relative overflow-hidden rounded-xl bg-gradient-card border border-border/50 p-3 sm:p-4 hover:border-primary/50 hover:shadow-glow transition-all duration-300 cursor-pointer animate-fade-in"
+              className="group relative overflow-hidden rounded-xl bg-gradient-card border border-border/50 p-3 sm:p-4 hover:border-primary/50 transition-all duration-300 cursor-pointer animate-fade-in hover:shadow-2xl hover:shadow-primary/10 hover:scale-[1.03] hover:-translate-y-1"
               style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => navigate(`/card/${card.id}`)}
             >
               {/* Rank Badge */}
               <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10">
-                <span className="flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-background/80 text-[10px] sm:text-xs font-bold backdrop-blur-sm">
+                <span className="flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-background/80 text-[10px] sm:text-xs font-bold backdrop-blur-sm border border-primary/30 group-hover:border-primary/60 transition-colors">
                   #{card.rank}
                 </span>
+              </div>
+
+              {/* Trending Badge */}
+              <div className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-accent/20 backdrop-blur-sm border border-accent/30">
+                  <Flame className="h-3 w-3 text-accent animate-pulse" />
+                  <span className="text-[10px] font-bold text-accent">HOT</span>
+                </div>
               </div>
 
               {/* Card Image */}
@@ -53,30 +61,31 @@ export const TrendingCards = () => {
                   alt={card.name}
                   className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
               {/* Card Info */}
               <div className="space-y-1.5 sm:space-y-2">
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-semibold text-xs sm:text-sm leading-tight line-clamp-1">
+                  <h3 className="font-semibold text-xs sm:text-sm leading-tight line-clamp-1 group-hover:text-primary transition-colors">
                     {card.name}
                   </h3>
                   <Badge
                     variant="outline"
-                    className={`text-[10px] px-1.5 py-0 flex-shrink-0 ${typeColors[card.type]}`}
+                    className={`text-[10px] px-1.5 py-0 flex-shrink-0 ${typeColors[card.type]} transition-all group-hover:scale-110`}
                   >
                     {card.type}
                   </Badge>
                 </div>
                 <p className="text-[10px] sm:text-xs text-muted-foreground line-clamp-1">{card.set}</p>
                 <div className="flex items-baseline justify-between">
-                  <span className="text-base sm:text-lg font-bold">${card.price.toFixed(2)}</span>
+                  <span className="text-base sm:text-lg font-bold group-hover:text-primary transition-colors">${card.price.toFixed(2)}</span>
                   <span
-                    className={`text-[10px] sm:text-xs font-medium ${
+                    className={`text-[10px] sm:text-xs font-medium flex items-center gap-1 ${
                       card.change24h >= 0 ? "text-success" : "text-destructive"
                     }`}
                   >
+                    <TrendingUp className={`h-3 w-3 ${card.change24h < 0 ? 'rotate-180' : ''}`} />
                     {card.change24h >= 0 ? "+" : ""}
                     {card.change24h.toFixed(1)}%
                   </span>

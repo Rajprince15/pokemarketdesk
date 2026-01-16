@@ -97,56 +97,56 @@ export const CardTable = () => {
           </div>
         </div>
 
-        <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden shadow-card">
+        <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden shadow-lg backdrop-blur-sm">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
-                <TableRow className="hover:bg-transparent border-border/50">
+                <TableRow className="hover:bg-transparent border-border/50 bg-secondary/20">
                   <TableHead className="w-12">#</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead className="hidden md:table-cell">Set</TableHead>
                   <TableHead className="hidden sm:table-cell">Rarity</TableHead>
                   <TableHead
-                    className="cursor-pointer hover:text-foreground transition-colors"
+                    className="cursor-pointer hover:text-foreground transition-colors group"
                     onClick={() => handleSort("price")}
                   >
-                    <div className="flex items-center gap-1 whitespace-nowrap">
+                    <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
                       Price
                       <SortIcon field="price" />
                     </div>
                   </TableHead>
                   <TableHead
-                    className="cursor-pointer hover:text-foreground transition-colors"
+                    className="cursor-pointer hover:text-foreground transition-colors group"
                     onClick={() => handleSort("change24h")}
                   >
-                    <div className="flex items-center gap-1 whitespace-nowrap">
+                    <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
                       24h %
                       <SortIcon field="change24h" />
                     </div>
                   </TableHead>
                   <TableHead
-                    className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors"
+                    className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors group"
                     onClick={() => handleSort("change7d")}
                   >
-                    <div className="flex items-center gap-1 whitespace-nowrap">
+                    <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
                       7d %
                       <SortIcon field="change7d" />
                     </div>
                   </TableHead>
                   <TableHead
-                    className="hidden md:table-cell cursor-pointer hover:text-foreground transition-colors"
+                    className="hidden md:table-cell cursor-pointer hover:text-foreground transition-colors group"
                     onClick={() => handleSort("volume24h")}
                   >
-                    <div className="flex items-center gap-1 whitespace-nowrap">
+                    <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
                       Volume (24h)
                       <SortIcon field="volume24h" />
                     </div>
                   </TableHead>
                   <TableHead
-                    className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors"
+                    className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors group"
                     onClick={() => handleSort("marketCap")}
                   >
-                    <div className="flex items-center gap-1 whitespace-nowrap">
+                    <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
                       Market Cap
                       <SortIcon field="marketCap" />
                     </div>
@@ -158,7 +158,7 @@ export const CardTable = () => {
                 {sortedCards.map((card, index) => (
                   <TableRow
                     key={card.id}
-                    className="group hover:bg-secondary/30 border-border/30 cursor-pointer animate-fade-in"
+                    className="group hover:bg-secondary/50 border-border/30 cursor-pointer animate-fade-in transition-all duration-200 hover:shadow-md"
                     style={{ animationDelay: `${index * 50}ms` }}
                     onClick={() => navigate(`/card/${card.id}`)}
                   >
@@ -167,7 +167,7 @@ export const CardTable = () => {
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2 sm:gap-3">
-                        <div className="h-8 w-6 sm:h-10 sm:w-8 rounded overflow-hidden bg-secondary/50 flex-shrink-0">
+                        <div className="h-8 w-6 sm:h-10 sm:w-8 rounded overflow-hidden bg-secondary/50 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
                           <img
                             src={card.image}
                             alt={card.name}
@@ -176,10 +176,10 @@ export const CardTable = () => {
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-1.5 sm:gap-2">
-                            <span className="font-semibold truncate text-xs sm:text-sm">{card.name}</span>
+                            <span className="font-semibold truncate text-xs sm:text-sm group-hover:text-primary transition-colors">{card.name}</span>
                             <Badge
                               variant="outline"
-                              className={`hidden sm:flex text-[10px] px-1.5 py-0 ${typeColors[card.type]}`}
+                              className={`hidden sm:flex text-[10px] px-1.5 py-0 ${typeColors[card.type]} transition-all group-hover:scale-110`}
                             >
                               {card.type}
                             </Badge>
@@ -198,7 +198,7 @@ export const CardTable = () => {
                         {card.rarity}
                       </span>
                     </TableCell>
-                    <TableCell className="font-semibold text-xs sm:text-sm whitespace-nowrap">
+                    <TableCell className="font-semibold text-xs sm:text-sm whitespace-nowrap group-hover:text-primary transition-colors">
                       ${card.price.toFixed(2)}
                     </TableCell>
                     <TableCell className="whitespace-nowrap">
@@ -231,14 +231,14 @@ export const CardTable = () => {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 sm:h-8 sm:w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="h-7 w-7 sm:h-8 sm:w-8 opacity-0 group-hover:opacity-100 transition-all hover:scale-110"
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleWatchlist(card.id);
                         }}
                       >
                         <Star
-                          className={`h-3 w-3 sm:h-4 sm:w-4 ${
+                          className={`h-3 w-3 sm:h-4 sm:w-4 transition-all ${
                             isInWatchlist(card.id)
                               ? "fill-accent text-accent"
                               : "text-muted-foreground"

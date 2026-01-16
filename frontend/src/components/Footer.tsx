@@ -11,7 +11,7 @@ export const Footer = () => {
           {/* Brand & Description */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg hover:scale-110 hover:rotate-6 transition-all duration-300">
                 <Zap className="h-5 w-5 text-white" />
               </div>
               <span className="text-lg sm:text-xl font-bold tracking-tight">
@@ -22,16 +22,16 @@ export const Footer = () => {
               The ultimate platform for tracking Pokémon card prices, market trends, and building your collection portfolio.
             </p>
             <div className="flex items-center gap-2 sm:gap-3">
-              <a href="#" className="p-2 rounded-lg glass hover:border-primary/50 transition-all hover:scale-110">
+              <a href="#" className="p-2 rounded-lg glass hover:border-primary/50 transition-all hover:scale-110 hover:bg-primary/10">
                 <Twitter className="h-4 w-4" />
               </a>
-              <a href="#" className="p-2 rounded-lg glass hover:border-primary/50 transition-all hover:scale-110">
+              <a href="#" className="p-2 rounded-lg glass hover:border-primary/50 transition-all hover:scale-110 hover:bg-primary/10">
                 <Github className="h-4 w-4" />
               </a>
-              <a href="#" className="p-2 rounded-lg glass hover:border-primary/50 transition-all hover:scale-110">
+              <a href="#" className="p-2 rounded-lg glass hover:border-primary/50 transition-all hover:scale-110 hover:bg-primary/10">
                 <Youtube className="h-4 w-4" />
               </a>
-              <a href="#" className="p-2 rounded-lg glass hover:border-primary/50 transition-all hover:scale-110">
+              <a href="#" className="p-2 rounded-lg glass hover:border-primary/50 transition-all hover:scale-110 hover:bg-primary/10">
                 <MessageCircle className="h-4 w-4" />
               </a>
             </div>
@@ -41,11 +41,11 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-sm sm:text-base font-bold">Quick Links</h3>
             <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">Rankings</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">Watchlist</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">Card Sets</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">Market News</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">Price Alerts</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">Rankings</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">Watchlist</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">Card Sets</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">Market News</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">Price Alerts</a></li>
             </ul>
           </div>
 
@@ -53,11 +53,11 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-sm sm:text-base font-bold">Resources</h3>
             <ul className="space-y-2 text-xs sm:text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">API Documentation</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">Price History</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">Grading Guide</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">FAQ</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors hover:translate-x-1 inline-block">Blog</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">API Documentation</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">Price History</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">Grading Guide</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">FAQ</a></li>
+              <li><a href="#" className="hover:text-primary transition-all hover:translate-x-1 inline-block duration-200">Blog</a></li>
             </ul>
           </div>
 
@@ -65,14 +65,14 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-sm sm:text-base font-bold">Contact Us</h3>
             <ul className="space-y-3 text-xs sm:text-sm text-muted-foreground">
-              <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-primary flex-shrink-0" />
+              <li className="flex items-center gap-2 group">
+                <Mail className="h-4 w-4 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
                 <a href="mailto:support@pokemart.com" className="hover:text-primary transition-colors break-all">
                   support@pokemart.com
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-primary flex-shrink-0" />
+              <li className="flex items-center gap-2 group">
+                <Phone className="h-4 w-4 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
                 <a href="tel:+1-555-POKEMON" className="hover:text-primary transition-colors">
                   +1-555-POKEMON
                 </a>
@@ -93,9 +93,9 @@ export const Footer = () => {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-muted-foreground">
           <p>© {currentYear} PokeMart. All rights reserved.</p>
           <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Cookie Policy</a>
+            <a href="#" className="hover:text-primary transition-colors hover:underline">Privacy Policy</a>
+            <a href="#" className="hover:text-primary transition-colors hover:underline">Terms of Service</a>
+            <a href="#" className="hover:text-primary transition-colors hover:underline">Cookie Policy</a>
           </div>
         </div>
       </div>

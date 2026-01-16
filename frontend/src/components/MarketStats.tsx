@@ -50,16 +50,16 @@ export const MarketStats = () => {
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className="flex items-center gap-3 p-4 sm:p-5 rounded-xl glass border border-border/50 hover:border-primary/30 hover:glow-hover transition-all duration-300 animate-fade-in card-hover"
+              className="group flex items-center gap-3 p-4 sm:p-5 rounded-xl glass border border-border/50 hover:border-primary/40 transition-all duration-300 animate-fade-in hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex-shrink-0 shadow-lg">
-                <stat.icon className="h-6 w-6 text-primary" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex-shrink-0 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                <stat.icon className="h-6 w-6 text-primary group-hover:animate-pulse" />
               </div>
               <div className="min-w-0 flex-1">
-                <p className="text-xs text-muted-foreground truncate font-medium">{stat.label}</p>
+                <p className="text-xs text-muted-foreground truncate font-medium group-hover:text-foreground transition-colors">{stat.label}</p>
                 <div className="flex items-baseline gap-1.5 flex-wrap">
-                  <span className="text-lg sm:text-xl font-bold">{stat.value}</span>
+                  <span className="text-lg sm:text-xl font-bold group-hover:text-primary transition-colors">{stat.value}</span>
                   <span
                     className={`text-xs font-semibold ${
                       stat.positive ? "text-success" : "text-destructive"

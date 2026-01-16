@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,13 +25,26 @@ export const Header = () => {
   const { user, isLoggedIn, login, logout } = useAuth();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 glass-strong">
+    <header className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
+      scrolled 
+        ? 'border-border/50 glass-strong shadow-lg' 
+        : 'border-border/30 glass'
+    }`}>
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg">
+        <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-all duration-300 hover:scale-105">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg hover:shadow-xl transition-all duration-300 hover:rotate-3">
             <Zap className="h-5 w-5 text-white" />
           </div>
           <span className="text-xl font-bold tracking-tight hidden sm:block">
@@ -41,21 +54,37 @@ export const Header = () => {
 
         {/* Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link to="/cards" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            <Sparkles className="h-4 w-4" />
+          <Link 
+            to="/cards" 
+            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-all duration-200 hover:translate-y-[-1px] relative group"
+          >
+            <Sparkles className="h-4 w-4 group-hover:animate-pulse" />
             All Cards
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link to="/predictions" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            <Target className="h-4 w-4" />
+          <Link 
+            to="/predictions" 
+            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-all duration-200 hover:translate-y-[-1px] relative group"
+          >
+            <Target className="h-4 w-4 group-hover:animate-pulse" />
             Predictions
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link to="/watchlist" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            <Star className="h-4 w-4" />
+          <Link 
+            to="/watchlist" 
+            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-all duration-200 hover:translate-y-[-1px] relative group"
+          >
+            <Star className="h-4 w-4 group-hover:animate-pulse" />
             Watchlist
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
           </Link>
-          <Link to="/news" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            <Newspaper className="h-4 w-4" />
+          <Link 
+            to="/news" 
+            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-all duration-200 hover:translate-y-[-1px] relative group"
+          >
+            <Newspaper className="h-4 w-4 group-hover:animate-pulse" />
             News
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
           </Link>
         </nav>
 
@@ -65,7 +94,7 @@ export const Header = () => {
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search cards..."
-              className="w-48 lg:w-64 pl-9 glass border-border/50 focus:border-primary/50 focus:ring-primary/20"
+              className="w-48 lg:w-64 pl-9 glass border-border/50 focus:border-primary/50 focus:ring-primary/20 transition-all duration-300 focus:w-56 lg:focus:w-72"
             />
           </div>
 
