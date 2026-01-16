@@ -657,11 +657,11 @@ export const pokemonCards: PokemonCard[] = [
 ];
 
 export const marketStats = {
-  totalMarketCap: 45780000,
-  totalVolume24h: 2340000,
-  totalCards: 12847,
+  totalMarketCap: 78450000,
+  totalVolume24h: 4560000,
+  totalCards: 18542,
   dominance: {
-    charizard: 32.5,
-    pikachu: 18.2,
+    charizard: 28.5,
+    pikachu: 16.8,
   },
 };
