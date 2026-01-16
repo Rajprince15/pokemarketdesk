@@ -1,7 +1,8 @@
-import { Search, Menu, Star, TrendingUp, Zap, User, LogOut } from "lucide-react";
+import { Search, Menu, Star, TrendingUp, Zap, User, LogOut, Newspaper, Target, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,36 +14,39 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export const Header = () => {
   const { user, isLoggedIn, login, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
             <Zap className="h-5 w-5 text-primary-foreground" />
           </div>
           <span className="text-xl font-bold tracking-tight">
             Poke<span className="text-primary">Market</span>
           </span>
-        </div>
+        </Link>
 
         {/* Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <a href="#" className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors">
-            <TrendingUp className="h-4 w-4" />
-            Rankings
-          </a>
-          <a href="#" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+          <Link to="/cards" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            <Sparkles className="h-4 w-4" />
+            All Cards
+          </Link>
+          <Link to="/predictions" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            <Target className="h-4 w-4" />
+            Predictions
+          </Link>
+          <Link to="/watchlist" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
             <Star className="h-4 w-4" />
             Watchlist
-          </a>
-          <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            Sets
-          </a>
-          <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+          </Link>
+          <Link to="/news" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+            <Newspaper className="h-4 w-4" />
             News
-          </a>
+          </Link>
         </nav>
 
         {/* Search & Actions */}
@@ -83,7 +87,7 @@ export const Header = () => {
                   <User className="mr-2 h-4 w-4" />
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={() => navigate('/watchlist')}>
                   <Star className="mr-2 h-4 w-4" />
                   Watchlist ({user.watchlist.length})
                 </DropdownMenuItem>
