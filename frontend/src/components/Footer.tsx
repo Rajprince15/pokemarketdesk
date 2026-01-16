@@ -67,8 +67,8 @@ export const Footer = () => {
             <ul className="space-y-3 text-xs sm:text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
                 <Mail className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary flex-shrink-0" />
-                <a href="mailto:support@pokemarket.com" className="hover:text-primary transition-colors break-all">
-                  support@pokemarket.com
+                <a href="mailto:support@pokemart.com" className="hover:text-primary transition-colors break-all">
+                  support@pokemart.com
                 </a>
               </li>
               <li className="flex items-center gap-2">
@@ -91,7 +91,7 @@ export const Footer = () => {
         <Separator className="my-6 sm:my-8 bg-border/50" />
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-muted-foreground">
-          <p>© {currentYear} PokeMarket. All rights reserved.</p>
+          <p>© {currentYear} PokeMart. All rights reserved.</p>
           <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
             <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
