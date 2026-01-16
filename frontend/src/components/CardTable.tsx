@@ -3,6 +3,8 @@ import { ChevronDown, ChevronUp, Star, Sparkles } from "lucide-react";
 import { pokemonCards, PokemonCard } from "@/data/pokemonCards";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -47,7 +49,8 @@ const formatNumber = (num: number) => {
 export const CardTable = () => {
   const [sortField, setSortField] = useState<SortField>("rank");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
-  const [favorites, setFavorites] = useState<Set<number>>(new Set());
+  const { toggleWatchlist, isInWatchlist } = useAuth();
+  const navigate = useNavigate();
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -56,18 +59,6 @@ export const CardTable = () => {
       setSortField(field);
       setSortDirection("asc");
     }
-  };
-
-  const toggleFavorite = (id: number) => {
-    setFavorites((prev) => {
-      const newFavorites = new Set(prev);
-      if (newFavorites.has(id)) {
-        newFavorites.delete(id);
-      } else {
-        newFavorites.add(id);
-      }
-      return newFavorites;
-    });
   };
 
   const sortedCards = [...pokemonCards].sort((a, b) => {
@@ -169,6 +160,7 @@ export const CardTable = () => {
                     key={card.id}
                     className="group hover:bg-secondary/30 border-border/30 cursor-pointer animate-fade-in"
                     style={{ animationDelay: `${index * 50}ms` }}
+                    onClick={() => navigate(`/card/${card.id}`)}
                   >
                     <TableCell className="font-medium text-muted-foreground text-xs sm:text-sm">
                       {card.rank}
@@ -242,12 +234,12 @@ export const CardTable = () => {
                         className="h-7 w-7 sm:h-8 sm:w-8 opacity-0 group-hover:opacity-100 transition-opacity"
                         onClick={(e) => {
                           e.stopPropagation();
-                          toggleFavorite(card.id);
+                          toggleWatchlist(card.id);
                         }}
                       >
                         <Star
                           className={`h-3 w-3 sm:h-4 sm:w-4 ${
-                            favorites.has(card.id)
+                            isInWatchlist(card.id)
                               ? "fill-accent text-accent"
                               : "text-muted-foreground"
                           }`}
