@@ -128,31 +128,32 @@ const News = () => {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Header />
-      <main className="container py-8">
+      <main className="container py-6 sm:py-8 px-4">
         <Link to="/">
-          <Button variant="ghost" className="mb-6">
+          <Button variant="ghost" className="mb-4 sm:mb-6" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Button>
         </Link>
 
-        <div className="flex items-center gap-3 mb-8">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-            <Newspaper className="h-6 w-6 text-primary" />
+        <div className="flex items-center gap-3 mb-6 sm:mb-8 flex-wrap">
+          <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-primary/10">
+            <Newspaper className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold">Pokemon Card News</h1>
-            <p className="text-muted-foreground">Latest updates from the trading card market</p>
+            <h1 className="text-2xl sm:text-3xl font-bold">Pokemon Card News</h1>
+            <p className="text-sm sm:text-base text-muted-foreground">Latest updates from the trading card market</p>
           </div>
         </div>
 
         {/* Category Filter */}
-        <div className="flex items-center gap-2 mb-6 flex-wrap">
-          <Filter className="h-4 w-4 text-muted-foreground" />
+        <div className="flex items-center gap-2 mb-4 sm:mb-6 flex-wrap">
+          <Filter className="h-4 w-4 text-muted-foreground flex-shrink-0" />
           <Button
             variant={selectedCategory === "all" ? "default" : "outline"}
             size="sm"
             onClick={() => setSelectedCategory("all")}
+            className="text-xs sm:text-sm"
           >
             All News
           </Button>
@@ -164,15 +165,17 @@ const News = () => {
                 variant={selectedCategory === key ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedCategory(key)}
+                className="text-xs sm:text-sm"
               >
                 <Icon className="h-3 w-3 mr-1" />
-                {config.label}
+                <span className="hidden xs:inline">{config.label}</span>
+                <span className="xs:hidden">{config.label.split(' ')[0]}</span>
               </Button>
             );
           })}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {filteredNews.map((news) => {
             const CategoryIcon = categoryConfig[news.category].icon;
             return (
@@ -182,20 +185,20 @@ const News = () => {
                   news.featured ? "lg:col-span-2" : ""
                 }`}
               >
-                <div className={`flex ${news.featured ? "flex-col md:flex-row" : "flex-col"}`}>
-                  <div className={`bg-gradient-to-br from-type-${news.category === 'market' ? 'fire' : news.category === 'release' ? 'electric' : news.category === 'auction' ? 'water' : 'psychic'}/20 to-transparent p-8 flex items-center justify-center ${
-                    news.featured ? "md:w-1/3" : ""
+                <div className={`flex ${news.featured ? "flex-col sm:flex-row" : "flex-col"}`}>
+                  <div className={`bg-gradient-to-br from-type-${news.category === 'market' ? 'fire' : news.category === 'release' ? 'electric' : news.category === 'auction' ? 'water' : 'psychic'}/20 to-transparent p-6 sm:p-8 flex items-center justify-center ${
+                    news.featured ? "sm:w-1/3" : ""
                   }`}>
                     <img
                       src={news.image}
                       alt={news.title}
                       className={`object-contain group-hover:scale-105 transition-transform duration-300 ${
-                        news.featured ? "w-40 h-52" : "w-32 h-40"
+                        news.featured ? "w-32 h-40 sm:w-40 sm:h-52" : "w-24 h-32 sm:w-32 sm:h-40"
                       }`}
                     />
                   </div>
-                  <div className={`p-6 flex flex-col justify-center ${news.featured ? "flex-1" : ""}`}>
-                    <div className="flex items-center gap-2 mb-3">
+                  <div className={`p-4 sm:p-6 flex flex-col justify-center ${news.featured ? "flex-1" : ""}`}>
+                    <div className="flex items-center gap-2 mb-2 sm:mb-3 flex-wrap">
                       <Badge className={categoryConfig[news.category].color}>
                         <CategoryIcon className="h-3 w-3 mr-1" />
                         {categoryConfig[news.category].label}
@@ -205,15 +208,15 @@ const News = () => {
                         {news.timeAgo}
                       </span>
                     </div>
-                    <h3 className={`font-bold mb-2 group-hover:text-primary transition-colors ${
-                      news.featured ? "text-xl" : "text-lg"
+                    <h3 className={`font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2 ${
+                      news.featured ? "text-lg sm:text-xl" : "text-base sm:text-lg"
                     }`}>
                       {news.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                    <p className="text-muted-foreground text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">
                       {news.content}
                     </p>
-                    <Button variant="ghost" size="sm" className="w-fit">
+                    <Button variant="ghost" size="sm" className="w-fit text-xs sm:text-sm">
                       Read More
                       <ExternalLink className="h-3 w-3 ml-2" />
                     </Button>

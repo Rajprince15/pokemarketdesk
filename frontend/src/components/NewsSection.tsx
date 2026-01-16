@@ -72,32 +72,32 @@ export const NewsSection = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <Newspaper className="h-5 w-5 text-primary" />
-            <h2 className="text-xl font-bold">Latest News</h2>
+            <h2 className="text-lg sm:text-xl font-bold">Latest News</h2>
           </div>
           <a
             href="#"
-            className="flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors"
+            className="flex items-center gap-1 text-xs sm:text-sm text-primary hover:text-primary/80 transition-colors"
           >
             View All
             <ExternalLink className="h-3 w-3" />
           </a>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Featured News */}
           {featuredNews && (
             <div className="lg:col-span-2 group cursor-pointer">
               <div className="relative h-full bg-gradient-to-br from-secondary/50 to-secondary/30 rounded-xl overflow-hidden border border-border/50 hover:border-primary/50 transition-all duration-300">
                 <div className="flex flex-col md:flex-row h-full">
-                  <div className="md:w-1/3 bg-gradient-to-br from-type-fire/20 to-type-fire/5 p-6 flex items-center justify-center">
+                  <div className="md:w-1/3 bg-gradient-to-br from-type-fire/20 to-type-fire/5 p-4 sm:p-6 flex items-center justify-center">
                     <img
                       src={featuredNews.image}
                       alt={featuredNews.title}
-                      className="w-32 h-40 object-contain group-hover:scale-105 transition-transform duration-300"
+                      className="w-24 h-32 sm:w-32 sm:h-40 object-contain group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div className="p-6 flex-1 flex flex-col justify-center">
-                    <div className="flex items-center gap-2 mb-3">
+                  <div className="p-4 sm:p-6 flex-1 flex flex-col justify-center">
+                    <div className="flex items-center gap-2 mb-2 sm:mb-3 flex-wrap">
                       <Badge className={categoryConfig[featuredNews.category].color}>
                         {categoryConfig[featuredNews.category].label}
                       </Badge>
@@ -106,10 +106,10 @@ export const NewsSection = () => {
                         {featuredNews.timeAgo}
                       </span>
                     </div>
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
                       {featuredNews.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm line-clamp-2">
+                    <p className="text-muted-foreground text-xs sm:text-sm line-clamp-2">
                       {featuredNews.excerpt}
                     </p>
                   </div>
@@ -119,15 +119,15 @@ export const NewsSection = () => {
           )}
 
           {/* Other News */}
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {otherNews.slice(0, 3).map((news) => {
               const CategoryIcon = categoryConfig[news.category].icon;
               return (
                 <div
                   key={news.id}
-                  className="group cursor-pointer bg-secondary/30 rounded-lg p-4 border border-border/50 hover:border-primary/50 transition-all duration-300"
+                  className="group cursor-pointer bg-secondary/30 rounded-lg p-3 sm:p-4 border border-border/50 hover:border-primary/50 transition-all duration-300"
                 >
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
                     <Badge variant="outline" className={`text-xs ${categoryConfig[news.category].color}`}>
                       <CategoryIcon className="h-3 w-3 mr-1" />
                       {categoryConfig[news.category].label}
@@ -137,7 +137,7 @@ export const NewsSection = () => {
                       {news.timeAgo}
                     </span>
                   </div>
-                  <h4 className="font-semibold text-sm group-hover:text-primary transition-colors line-clamp-2">
+                  <h4 className="font-semibold text-xs sm:text-sm group-hover:text-primary transition-colors line-clamp-2">
                     {news.title}
                   </h4>
                 </div>

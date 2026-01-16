@@ -28,22 +28,22 @@ export const TrendingCards = () => {
           </Badge>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
           {trendingCards.map((card, index) => (
             <div
               key={card.id}
-              className="group relative overflow-hidden rounded-xl bg-gradient-card border border-border/50 p-4 hover:border-primary/50 hover:shadow-glow transition-all duration-300 cursor-pointer animate-fade-in"
+              className="group relative overflow-hidden rounded-xl bg-gradient-card border border-border/50 p-3 sm:p-4 hover:border-primary/50 hover:shadow-glow transition-all duration-300 cursor-pointer animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Rank Badge */}
-              <div className="absolute top-3 left-3 z-10">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-background/80 text-xs font-bold backdrop-blur-sm">
+              <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10">
+                <span className="flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-background/80 text-[10px] sm:text-xs font-bold backdrop-blur-sm">
                   #{card.rank}
                 </span>
               </div>
 
               {/* Card Image */}
-              <div className="relative mb-4 aspect-[3/4] overflow-hidden rounded-lg bg-secondary/30">
+              <div className="relative mb-3 sm:mb-4 aspect-[3/4] overflow-hidden rounded-lg bg-secondary/30">
                 <img
                   src={card.image}
                   alt={card.name}
@@ -53,23 +53,23 @@ export const TrendingCards = () => {
               </div>
 
               {/* Card Info */}
-              <div className="space-y-2">
+              <div className="space-y-1.5 sm:space-y-2">
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-semibold text-sm leading-tight line-clamp-1">
+                  <h3 className="font-semibold text-xs sm:text-sm leading-tight line-clamp-1">
                     {card.name}
                   </h3>
                   <Badge
                     variant="outline"
-                    className={`text-[10px] px-1.5 py-0 ${typeColors[card.type]}`}
+                    className={`text-[10px] px-1.5 py-0 flex-shrink-0 ${typeColors[card.type]}`}
                   >
                     {card.type}
                   </Badge>
                 </div>
-                <p className="text-xs text-muted-foreground">{card.set}</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground line-clamp-1">{card.set}</p>
                 <div className="flex items-baseline justify-between">
-                  <span className="text-lg font-bold">${card.price.toFixed(2)}</span>
+                  <span className="text-base sm:text-lg font-bold">${card.price.toFixed(2)}</span>
                   <span
-                    className={`text-xs font-medium ${
+                    className={`text-[10px] sm:text-xs font-medium ${
                       card.change24h >= 0 ? "text-success" : "text-destructive"
                     }`}
                   >

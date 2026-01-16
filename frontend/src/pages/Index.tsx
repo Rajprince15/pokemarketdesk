@@ -13,7 +13,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-hero">
       <Header />
-      <main>
+      <main className="px-4">
         <MarketStats />
 
         

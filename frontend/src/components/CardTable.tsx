@@ -89,178 +89,180 @@ export const CardTable = () => {
   return (
     <section className="py-8 pb-16">
       <div className="container">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
               <Sparkles className="h-4 w-4 text-primary" />
             </div>
-            <h2 className="text-xl font-bold">All Cards</h2>
+            <h2 className="text-lg sm:text-xl font-bold">All Cards</h2>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="text-xs sm:text-sm">
               Filters
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" className="text-xs sm:text-sm">
               Sets
             </Button>
           </div>
         </div>
 
         <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden shadow-card">
-          <Table>
-            <TableHeader>
-              <TableRow className="hover:bg-transparent border-border/50">
-                <TableHead className="w-12">#</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead className="hidden md:table-cell">Set</TableHead>
-                <TableHead className="hidden sm:table-cell">Rarity</TableHead>
-                <TableHead
-                  className="cursor-pointer hover:text-foreground transition-colors"
-                  onClick={() => handleSort("price")}
-                >
-                  <div className="flex items-center gap-1">
-                    Price
-                    <SortIcon field="price" />
-                  </div>
-                </TableHead>
-                <TableHead
-                  className="cursor-pointer hover:text-foreground transition-colors"
-                  onClick={() => handleSort("change24h")}
-                >
-                  <div className="flex items-center gap-1">
-                    24h %
-                    <SortIcon field="change24h" />
-                  </div>
-                </TableHead>
-                <TableHead
-                  className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors"
-                  onClick={() => handleSort("change7d")}
-                >
-                  <div className="flex items-center gap-1">
-                    7d %
-                    <SortIcon field="change7d" />
-                  </div>
-                </TableHead>
-                <TableHead
-                  className="hidden md:table-cell cursor-pointer hover:text-foreground transition-colors"
-                  onClick={() => handleSort("volume24h")}
-                >
-                  <div className="flex items-center gap-1">
-                    Volume (24h)
-                    <SortIcon field="volume24h" />
-                  </div>
-                </TableHead>
-                <TableHead
-                  className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors"
-                  onClick={() => handleSort("marketCap")}
-                >
-                  <div className="flex items-center gap-1">
-                    Market Cap
-                    <SortIcon field="marketCap" />
-                  </div>
-                </TableHead>
-                <TableHead className="w-12"></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {sortedCards.map((card, index) => (
-                <TableRow
-                  key={card.id}
-                  className="group hover:bg-secondary/30 border-border/30 cursor-pointer animate-fade-in"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <TableCell className="font-medium text-muted-foreground">
-                    {card.rank}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-3">
-                      <div className="h-10 w-8 rounded overflow-hidden bg-secondary/50 flex-shrink-0">
-                        <img
-                          src={card.image}
-                          alt={card.name}
-                          className="h-full w-full object-contain"
-                        />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold truncate">{card.name}</span>
-                          <Badge
-                            variant="outline"
-                            className={`hidden sm:flex text-[10px] px-1.5 py-0 ${typeColors[card.type]}`}
-                          >
-                            {card.type}
-                          </Badge>
-                        </div>
-                        <span className="text-xs text-muted-foreground md:hidden">
-                          {card.set}
-                        </span>
-                      </div>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="hover:bg-transparent border-border/50">
+                  <TableHead className="w-12">#</TableHead>
+                  <TableHead>Name</TableHead>
+                  <TableHead className="hidden md:table-cell">Set</TableHead>
+                  <TableHead className="hidden sm:table-cell">Rarity</TableHead>
+                  <TableHead
+                    className="cursor-pointer hover:text-foreground transition-colors"
+                    onClick={() => handleSort("price")}
+                  >
+                    <div className="flex items-center gap-1 whitespace-nowrap">
+                      Price
+                      <SortIcon field="price" />
                     </div>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell text-muted-foreground">
-                    {card.set}
-                  </TableCell>
-                  <TableCell className="hidden sm:table-cell">
-                    <span className={`text-sm ${rarityColors[card.rarity]}`}>
-                      {card.rarity}
-                    </span>
-                  </TableCell>
-                  <TableCell className="font-semibold">
-                    ${card.price.toFixed(2)}
-                  </TableCell>
-                  <TableCell>
-                    <span
-                      className={`font-medium ${
-                        card.change24h >= 0 ? "text-success" : "text-destructive"
-                      }`}
-                    >
-                      {card.change24h >= 0 ? "+" : ""}
-                      {card.change24h.toFixed(1)}%
-                    </span>
-                  </TableCell>
-                  <TableCell className="hidden lg:table-cell">
-                    <span
-                      className={`font-medium ${
-                        card.change7d >= 0 ? "text-success" : "text-destructive"
-                      }`}
-                    >
-                      {card.change7d >= 0 ? "+" : ""}
-                      {card.change7d.toFixed(1)}%
-                    </span>
-                  </TableCell>
-                  <TableCell className="hidden md:table-cell text-muted-foreground">
-                    {formatNumber(card.volume24h)}
-                  </TableCell>
-                  <TableCell className="hidden lg:table-cell text-muted-foreground">
-                    {formatNumber(card.marketCap)}
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleFavorite(card.id);
-                      }}
-                    >
-                      <Star
-                        className={`h-4 w-4 ${
-                          favorites.has(card.id)
-                            ? "fill-accent text-accent"
-                            : "text-muted-foreground"
-                        }`}
-                      />
-                    </Button>
-                  </TableCell>
+                  </TableHead>
+                  <TableHead
+                    className="cursor-pointer hover:text-foreground transition-colors"
+                    onClick={() => handleSort("change24h")}
+                  >
+                    <div className="flex items-center gap-1 whitespace-nowrap">
+                      24h %
+                      <SortIcon field="change24h" />
+                    </div>
+                  </TableHead>
+                  <TableHead
+                    className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors"
+                    onClick={() => handleSort("change7d")}
+                  >
+                    <div className="flex items-center gap-1 whitespace-nowrap">
+                      7d %
+                      <SortIcon field="change7d" />
+                    </div>
+                  </TableHead>
+                  <TableHead
+                    className="hidden md:table-cell cursor-pointer hover:text-foreground transition-colors"
+                    onClick={() => handleSort("volume24h")}
+                  >
+                    <div className="flex items-center gap-1 whitespace-nowrap">
+                      Volume (24h)
+                      <SortIcon field="volume24h" />
+                    </div>
+                  </TableHead>
+                  <TableHead
+                    className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors"
+                    onClick={() => handleSort("marketCap")}
+                  >
+                    <div className="flex items-center gap-1 whitespace-nowrap">
+                      Market Cap
+                      <SortIcon field="marketCap" />
+                    </div>
+                  </TableHead>
+                  <TableHead className="w-12"></TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                {sortedCards.map((card, index) => (
+                  <TableRow
+                    key={card.id}
+                    className="group hover:bg-secondary/30 border-border/30 cursor-pointer animate-fade-in"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <TableCell className="font-medium text-muted-foreground text-xs sm:text-sm">
+                      {card.rank}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <div className="h-8 w-6 sm:h-10 sm:w-8 rounded overflow-hidden bg-secondary/50 flex-shrink-0">
+                          <img
+                            src={card.image}
+                            alt={card.name}
+                            className="h-full w-full object-contain"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5 sm:gap-2">
+                            <span className="font-semibold truncate text-xs sm:text-sm">{card.name}</span>
+                            <Badge
+                              variant="outline"
+                              className={`hidden sm:flex text-[10px] px-1.5 py-0 ${typeColors[card.type]}`}
+                            >
+                              {card.type}
+                            </Badge>
+                          </div>
+                          <span className="text-[10px] sm:text-xs text-muted-foreground md:hidden truncate block">
+                            {card.set}
+                          </span>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell text-muted-foreground text-xs sm:text-sm">
+                      {card.set}
+                    </TableCell>
+                    <TableCell className="hidden sm:table-cell">
+                      <span className={`text-xs sm:text-sm ${rarityColors[card.rarity]}`}>
+                        {card.rarity}
+                      </span>
+                    </TableCell>
+                    <TableCell className="font-semibold text-xs sm:text-sm whitespace-nowrap">
+                      ${card.price.toFixed(2)}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap">
+                      <span
+                        className={`font-medium text-xs sm:text-sm ${
+                          card.change24h >= 0 ? "text-success" : "text-destructive"
+                        }`}
+                      >
+                        {card.change24h >= 0 ? "+" : ""}
+                        {card.change24h.toFixed(1)}%
+                      </span>
+                    </TableCell>
+                    <TableCell className="hidden lg:table-cell whitespace-nowrap">
+                      <span
+                        className={`font-medium text-xs sm:text-sm ${
+                          card.change7d >= 0 ? "text-success" : "text-destructive"
+                        }`}
+                      >
+                        {card.change7d >= 0 ? "+" : ""}
+                        {card.change7d.toFixed(1)}%
+                      </span>
+                    </TableCell>
+                    <TableCell className="hidden md:table-cell text-muted-foreground text-xs sm:text-sm">
+                      {formatNumber(card.volume24h)}
+                    </TableCell>
+                    <TableCell className="hidden lg:table-cell text-muted-foreground text-xs sm:text-sm">
+                      {formatNumber(card.marketCap)}
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-7 w-7 sm:h-8 sm:w-8 opacity-0 group-hover:opacity-100 transition-opacity"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleFavorite(card.id);
+                        }}
+                      >
+                        <Star
+                          className={`h-3 w-3 sm:h-4 sm:w-4 ${
+                            favorites.has(card.id)
+                              ? "fill-accent text-accent"
+                              : "text-muted-foreground"
+                          }`}
+                        />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </div>
 
         <div className="flex items-center justify-center mt-6">
-          <Button variant="outline">
+          <Button variant="outline" size="sm" className="sm:size-default">
             Show More Cards
           </Button>
         </div>
