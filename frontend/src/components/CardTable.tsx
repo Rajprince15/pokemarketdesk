@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Star, Sparkles } from "lucide-react";
+import { ChevronDown, ChevronUp, Star, Sparkles, SlidersHorizontal } from "lucide-react";
 import { pokemonCards, PokemonCard } from "@/data/pokemonCards";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -78,36 +78,40 @@ export const CardTable = () => {
   };
 
   return (
-    <section className="py-8 pb-16">
-      <div className="container">
-        <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
+    <section className="py-8 sm:py-10 pb-12 sm:pb-16">
+      <div className="container px-4 sm:px-6 lg:px-8">
+        {/* Enhanced Header with Better Mobile Layout */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10">
               <Sparkles className="h-4 w-4 text-primary" />
             </div>
-            <h2 className="text-lg sm:text-xl font-bold">All Cards</h2>
+            <h2 className="text-lg sm:text-2xl font-bold">All Cards</h2>
           </div>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm" className="text-xs sm:text-sm">
-              Filters
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <Button variant="outline" size="sm" className="text-xs sm:text-sm gap-2 flex-1 sm:flex-initial min-h-[44px] sm:min-h-auto touch-manipulation">
+              <SlidersHorizontal className="h-4 w-4" />
+              <span className="hidden xs:inline">Filters</span>
             </Button>
-            <Button variant="outline" size="sm" className="text-xs sm:text-sm">
-              Sets
+            <Button variant="outline" size="sm" className="text-xs sm:text-sm gap-2 flex-1 sm:flex-initial min-h-[44px] sm:min-h-auto touch-manipulation">
+              <Sparkles className="h-4 w-4" />
+              <span className="hidden xs:inline">Sets</span>
             </Button>
           </div>
         </div>
 
+        {/* Optimized Table Container for Mobile */}
         <div className="rounded-xl border border-border/50 bg-card/50 overflow-hidden shadow-lg backdrop-blur-sm">
           <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow className="hover:bg-transparent border-border/50 bg-secondary/20">
-                  <TableHead className="w-12">#</TableHead>
-                  <TableHead>Name</TableHead>
+                  <TableHead className="w-12 sm:w-16">#</TableHead>
+                  <TableHead className="min-w-[140px] sm:min-w-[180px]">Name</TableHead>
                   <TableHead className="hidden md:table-cell">Set</TableHead>
                   <TableHead className="hidden sm:table-cell">Rarity</TableHead>
                   <TableHead
-                    className="cursor-pointer hover:text-foreground transition-colors group"
+                    className="cursor-pointer hover:text-foreground transition-colors group touch-manipulation"
                     onClick={() => handleSort("price")}
                   >
                     <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
@@ -116,34 +120,34 @@ export const CardTable = () => {
                     </div>
                   </TableHead>
                   <TableHead
-                    className="cursor-pointer hover:text-foreground transition-colors group"
+                    className="cursor-pointer hover:text-foreground transition-colors group touch-manipulation"
                     onClick={() => handleSort("change24h")}
                   >
                     <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
-                      24h %
+                      24h
                       <SortIcon field="change24h" />
                     </div>
                   </TableHead>
                   <TableHead
-                    className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors group"
+                    className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors group touch-manipulation"
                     onClick={() => handleSort("change7d")}
                   >
                     <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
-                      7d %
+                      7d
                       <SortIcon field="change7d" />
                     </div>
                   </TableHead>
                   <TableHead
-                    className="hidden md:table-cell cursor-pointer hover:text-foreground transition-colors group"
+                    className="hidden xl:table-cell cursor-pointer hover:text-foreground transition-colors group touch-manipulation"
                     onClick={() => handleSort("volume24h")}
                   >
                     <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
-                      Volume (24h)
+                      Volume
                       <SortIcon field="volume24h" />
                     </div>
                   </TableHead>
                   <TableHead
-                    className="hidden lg:table-cell cursor-pointer hover:text-foreground transition-colors group"
+                    className="hidden xl:table-cell cursor-pointer hover:text-foreground transition-colors group touch-manipulation"
                     onClick={() => handleSort("marketCap")}
                   >
                     <div className="flex items-center gap-1 whitespace-nowrap group-hover:text-primary">
@@ -151,14 +155,14 @@ export const CardTable = () => {
                       <SortIcon field="marketCap" />
                     </div>
                   </TableHead>
-                  <TableHead className="w-12"></TableHead>
+                  <TableHead className="w-12 sm:w-16"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {sortedCards.map((card, index) => (
                   <TableRow
                     key={card.id}
-                    className="group hover:bg-secondary/50 border-border/30 cursor-pointer animate-fade-in transition-all duration-200 hover:shadow-md"
+                    className="group hover:bg-secondary/50 border-border/30 cursor-pointer animate-fade-in transition-all duration-200 hover:shadow-md touch-manipulation"
                     style={{ animationDelay: `${index * 50}ms` }}
                     onClick={() => navigate(`/card/${card.id}`)}
                   >
@@ -167,11 +171,12 @@ export const CardTable = () => {
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2 sm:gap-3">
-                        <div className="h-8 w-6 sm:h-10 sm:w-8 rounded overflow-hidden bg-secondary/50 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
+                        <div className="h-10 w-7 sm:h-12 sm:w-9 rounded overflow-hidden bg-secondary/50 flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
                           <img
                             src={card.image}
                             alt={card.name}
                             className="h-full w-full object-contain"
+                            loading="lazy"
                           />
                         </div>
                         <div className="min-w-0">
@@ -221,24 +226,24 @@ export const CardTable = () => {
                         {card.change7d.toFixed(1)}%
                       </span>
                     </TableCell>
-                    <TableCell className="hidden md:table-cell text-muted-foreground text-xs sm:text-sm">
+                    <TableCell className="hidden xl:table-cell text-muted-foreground text-xs sm:text-sm">
                       {formatNumber(card.volume24h)}
                     </TableCell>
-                    <TableCell className="hidden lg:table-cell text-muted-foreground text-xs sm:text-sm">
+                    <TableCell className="hidden xl:table-cell text-muted-foreground text-xs sm:text-sm">
                       {formatNumber(card.marketCap)}
                     </TableCell>
                     <TableCell>
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 sm:h-8 sm:w-8 opacity-0 group-hover:opacity-100 transition-all hover:scale-110"
+                        className="h-9 w-9 sm:h-8 sm:w-8 opacity-0 group-hover:opacity-100 transition-all hover:scale-110 touch-manipulation"
                         onClick={(e) => {
                           e.stopPropagation();
                           toggleWatchlist(card.id);
                         }}
                       >
                         <Star
-                          className={`h-3 w-3 sm:h-4 sm:w-4 transition-all ${
+                          className={`h-4 w-4 transition-all ${
                             isInWatchlist(card.id)
                               ? "fill-accent text-accent"
                               : "text-muted-foreground"
@@ -253,8 +258,13 @@ export const CardTable = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-center mt-6">
-          <Button variant="outline" size="sm" className="sm:size-default">
+        {/* Load More Button - Touch Friendly */}
+        <div className="flex items-center justify-center mt-6 sm:mt-8">
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="gap-2 min-h-[48px] px-8 touch-manipulation"
+          >
             Show More Cards
           </Button>
         </div>

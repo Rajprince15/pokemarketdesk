@@ -1,4 +1,4 @@
-import { Star, TrendingUp, TrendingDown, Eye, ArrowRight } from "lucide-react";
+import { Star, TrendingUp, TrendingDown, ArrowRight } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { pokemonCards } from "@/data/pokemonCards";
 import { Button } from "@/components/ui/button";
@@ -24,21 +24,21 @@ export const WatchlistSection = () => {
   const previewCards = watchlistCards.slice(0, 4);
 
   return (
-    <section className="py-8 border-b border-border/30">
-      <div className="container px-4">
+    <section className="py-8 sm:py-10 border-b border-border/30">
+      <div className="container px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
               <Star className="h-4 w-4 text-accent" />
             </div>
-            <h2 className="text-lg sm:text-xl font-bold">Your Watchlist</h2>
+            <h2 className="text-lg sm:text-2xl font-bold">Your Watchlist</h2>
             <Badge variant="secondary" className="ml-2">
               {watchlistCards.length} cards
             </Badge>
           </div>
           {watchlistCards.length > 4 && (
             <Link to="/watchlist">
-              <Button variant="outline" size="sm" className="gap-2 hover:bg-secondary/50">
+              <Button variant="outline" size="sm" className="gap-2 hover:bg-secondary/50 min-h-[44px] sm:min-h-auto">
                 View All
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -46,35 +46,37 @@ export const WatchlistSection = () => {
           )}
         </div>
 
+        {/* Optimized Grid for Mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {previewCards.map((card, index) => (
             <div
               key={card.id}
-              className="group relative bg-gradient-card rounded-xl p-4 border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-xl hover:shadow-accent/10 hover:scale-[1.02] animate-fade-in"
+              className="group relative bg-gradient-card rounded-xl p-4 border border-border/50 hover:border-accent/50 transition-all duration-300 hover:shadow-xl hover:shadow-accent/10 hover:scale-[1.02] animate-fade-in touch-manipulation"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-2 right-2 h-8 w-8 text-accent hover:text-accent/80 hover:bg-accent/10 transition-all hover:scale-110"
+                className="absolute top-2 right-2 h-9 w-9 text-accent hover:text-accent/80 hover:bg-accent/10 transition-all hover:scale-110 touch-manipulation"
                 onClick={() => toggleWatchlist(card.id)}
               >
                 <Star className="h-4 w-4 fill-current" />
               </Button>
 
               <div className="flex items-center gap-3">
-                <div className="w-16 h-20 rounded-lg bg-secondary/50 p-1 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-16 h-20 sm:w-20 sm:h-24 rounded-lg bg-secondary/50 p-1 flex items-center justify-center group-hover:scale-110 transition-transform flex-shrink-0">
                   <img
                     src={card.image}
                     alt={card.name}
                     className="w-full h-full object-contain"
+                    loading="lazy"
                   />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-sm truncate group-hover:text-primary transition-colors">{card.name}</h3>
                   <p className="text-xs text-muted-foreground truncate">{card.set}</p>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="font-bold group-hover:text-primary transition-colors">${card.price.toLocaleString()}</span>
+                    <span className="font-bold text-base group-hover:text-primary transition-colors">${card.price.toLocaleString()}</span>
                     <span
                       className={`flex items-center text-xs font-medium ${
                         card.change24h >= 0 ? "text-success" : "text-destructive"

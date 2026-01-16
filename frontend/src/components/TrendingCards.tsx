@@ -18,24 +18,25 @@ export const TrendingCards = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-8">
-      <div className="container">
+    <section className="py-8 sm:py-10 border-b border-border/30">
+      <div className="container px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-2 mb-6">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10">
             <Flame className="h-4 w-4 text-accent" />
           </div>
-          <h2 className="text-xl font-bold">Trending Cards</h2>
+          <h2 className="text-xl sm:text-2xl font-bold">Trending Cards</h2>
           <Badge variant="secondary" className="ml-2">
             <TrendingUp className="h-3 w-3 mr-1" />
             Hot
           </Badge>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+        {/* Optimized Grid for All Breakpoints */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-5">
           {trendingCards.map((card, index) => (
             <div
               key={card.id}
-              className="group relative overflow-hidden rounded-xl bg-gradient-card border border-border/50 p-3 sm:p-4 hover:border-primary/50 transition-all duration-300 cursor-pointer animate-fade-in hover:shadow-2xl hover:shadow-primary/10 hover:scale-[1.03] hover:-translate-y-1"
+              className="group relative overflow-hidden rounded-xl bg-gradient-card border border-border/50 p-3 sm:p-4 hover:border-primary/50 transition-all duration-300 cursor-pointer animate-fade-in hover:shadow-2xl hover:shadow-primary/10 hover:scale-[1.03] hover:-translate-y-1 touch-manipulation"
               style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => navigate(`/card/${card.id}`)}
             >
@@ -60,6 +61,7 @@ export const TrendingCards = () => {
                   src={card.image}
                   alt={card.name}
                   className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>

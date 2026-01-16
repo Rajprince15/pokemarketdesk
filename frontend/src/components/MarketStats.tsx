@@ -44,17 +44,17 @@ const stats = [
 
 export const MarketStats = () => {
   return (
-    <section className="py-6 border-b border-border/30">
-      <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+    <section className="py-6 sm:py-8 border-b border-border/30">
+      <div className="container px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {stats.map((stat, index) => (
             <div
               key={stat.label}
-              className="group flex items-center gap-3 p-4 sm:p-5 rounded-xl glass border border-border/50 hover:border-primary/40 transition-all duration-300 animate-fade-in hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10"
+              className="group flex items-center gap-3 p-4 sm:p-5 rounded-xl glass border border-border/50 hover:border-primary/40 transition-all duration-300 animate-fade-in hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/10 min-h-[80px] sm:min-h-[96px]"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex-shrink-0 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
-                <stat.icon className="h-6 w-6 text-primary group-hover:animate-pulse" />
+              <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex-shrink-0 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                <stat.icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary group-hover:animate-pulse" />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-xs text-muted-foreground truncate font-medium group-hover:text-foreground transition-colors">{stat.label}</p>

@@ -79,9 +79,9 @@ const AllCards = () => {
   return (
     <div className="min-h-screen bg-gradient-hero bg-gradient-mesh grain relative">
       <Header />
-      <main className="container py-6 sm:py-8 px-4 relative z-10">
+      <main className="container py-6 sm:py-8 px-4 sm:px-6 lg:px-8 relative z-10">
         <Link to="/">
-          <Button variant="ghost" className="mb-4 sm:mb-6" size="sm">
+          <Button variant="ghost" className="mb-4 sm:mb-6 min-h-[44px] sm:min-h-auto touch-manipulation" size="sm">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Home
           </Button>
@@ -108,14 +108,14 @@ const AllCards = () => {
                   placeholder="Search by name or set..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 glass"
+                  className="pl-10 glass min-h-[48px] sm:min-h-auto"
                 />
               </div>
             </div>
 
             {/* Type Filter */}
             <Select value={selectedType} onValueChange={setSelectedType}>
-              <SelectTrigger>
+              <SelectTrigger className="min-h-[48px] sm:min-h-auto">
                 <SelectValue placeholder="Type" />
               </SelectTrigger>
               <SelectContent>
@@ -130,7 +130,7 @@ const AllCards = () => {
 
             {/* Rarity Filter */}
             <Select value={selectedRarity} onValueChange={setSelectedRarity}>
-              <SelectTrigger>
+              <SelectTrigger className="min-h-[48px] sm:min-h-auto">
                 <SelectValue placeholder="Rarity" />
               </SelectTrigger>
               <SelectContent>
@@ -173,7 +173,7 @@ const AllCards = () => {
             Showing {filteredCards.length} of {pokemonCards.length} cards
           </p>
           <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
-            <SelectTrigger className="w-full sm:w-[180px]">
+            <SelectTrigger className="w-full sm:w-[180px] min-h-[48px] sm:min-h-auto">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
@@ -187,25 +187,25 @@ const AllCards = () => {
           </Select>
         </div>
 
-        {/* Cards Grid */}
+        {/* Cards Grid - Optimized Responsive Grid */}
         {filteredCards.length === 0 ? (
           <div className="glass rounded-2xl p-8 sm:p-12 text-center border border-border/50">
             <Search className="h-12 w-12 sm:h-16 sm:w-16 mx-auto mb-4 text-muted-foreground" />
             <h2 className="text-lg sm:text-xl font-semibold mb-2">No cards found</h2>
             <p className="text-sm sm:text-base text-muted-foreground mb-6">Try adjusting your search or filters</p>
-            <Button onClick={clearAllFilters} size="sm" className="sm:size-default">Clear Filters</Button>
+            <Button onClick={clearAllFilters} size="lg" className="min-h-[48px] touch-manipulation">Clear Filters</Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-5">
             {filteredCards.map((card) => (
               <div
                 key={card.id}
-                className="group relative glass rounded-2xl p-4 sm:p-5 border border-border/50 hover:border-primary/50 card-hover transition-all duration-300"
+                className="group relative glass rounded-2xl p-3 sm:p-4 md:p-5 border border-border/50 hover:border-primary/50 card-hover transition-all duration-300 touch-manipulation"
               >
                 <Button
                   variant="ghost"
                   size="icon"
-                  className={`absolute top-2 sm:top-3 right-2 sm:right-3 h-7 w-7 sm:h-8 sm:w-8 z-10 ${
+                  className={`absolute top-2 right-2 h-8 w-8 z-10 touch-manipulation ${
                     isInWatchlist(card.id)
                       ? "text-accent"
                       : "text-muted-foreground hover:text-accent"
@@ -213,40 +213,41 @@ const AllCards = () => {
                   onClick={() => toggleWatchlist(card.id)}
                 >
                   <Star
-                    className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${isInWatchlist(card.id) ? "fill-current" : ""}`}
+                    className={`h-4 w-4 ${isInWatchlist(card.id) ? "fill-current" : ""}`}
                   />
                 </Button>
 
                 {card.trending && (
-                  <Badge className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-destructive/90 text-white text-[10px] sm:text-xs shadow-lg">
-                    Trending
+                  <Badge className="absolute top-2 left-2 bg-destructive/90 text-white text-[10px] shadow-lg">
+                    Hot
                   </Badge>
                 )}
 
-                <div className="flex flex-col items-center mb-3 sm:mb-4">
+                <div className="flex flex-col items-center mb-3">
                   <div
-                    className={`w-full aspect-[2/3] rounded-lg ${typeColors[card.type] || "bg-secondary"} p-2 sm:p-3 flex items-center justify-center mb-2 sm:mb-3`}
+                    className={`w-full aspect-[2/3] rounded-lg ${typeColors[card.type] || "bg-secondary"} p-2 flex items-center justify-center mb-2`}
                   >
                     <img
                       src={card.image}
                       alt={card.name}
                       className="w-full h-full object-contain group-hover:scale-105 transition-transform"
+                      loading="lazy"
                     />
                   </div>
-                  <Badge variant="outline" className={`text-[10px] sm:text-xs ${typeColors[card.type]}`}>
+                  <Badge variant="outline" className={`text-[10px] ${typeColors[card.type]}`}>
                     {card.type}
                   </Badge>
                 </div>
 
                 <div className="space-y-2">
                   <div className="text-center">
-                    <h3 className="font-bold text-sm sm:text-base line-clamp-1">{card.name}</h3>
-                    <p className="text-[10px] sm:text-xs text-muted-foreground line-clamp-1">{card.set}</p>
+                    <h3 className="font-bold text-xs sm:text-sm line-clamp-1">{card.name}</h3>
+                    <p className="text-[10px] text-muted-foreground line-clamp-1">{card.set}</p>
                   </div>
 
                   <div className="text-center pt-2 border-t border-border/50">
-                    <p className="text-xl sm:text-2xl font-bold">${card.price.toLocaleString()}</p>
-                    <div className="flex items-center justify-center gap-2 sm:gap-3 mt-2 text-[10px] sm:text-xs">
+                    <p className="text-lg sm:text-xl font-bold">${card.price.toLocaleString()}</p>
+                    <div className="flex items-center justify-center gap-2 mt-1 text-[10px]">
                       <span
                         className={`font-medium ${
                           card.change24h >= 0 ? "text-success" : "text-destructive"
@@ -266,9 +267,9 @@ const AllCards = () => {
                     </div>
                   </div>
 
-                  <div className="flex justify-between text-[10px] sm:text-xs text-muted-foreground pt-2 border-t border-border/50">
-                    <span className="line-clamp-1">{card.rarity}</span>
-                    <span>#{card.rank}</span>
+                  <div className="flex justify-between text-[10px] text-muted-foreground pt-2 border-t border-border/50">
+                    <span className="line-clamp-1 text-left">{card.rarity}</span>
+                    <span className="flex-shrink-0">#{card.rank}</span>
                   </div>
                 </div>
               </div>

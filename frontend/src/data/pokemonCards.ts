@@ -27,7 +27,7 @@ export const pokemonCards: PokemonCard[] = [
     change7d: 12.8,
     volume24h: 125000,
     marketCap: 4250000,
-    image: "https://images.pokemontcg.io/swsh45/107_hires.png",
+    image: "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/series/swsh3/20/",
     trending: true,
   },
   {
