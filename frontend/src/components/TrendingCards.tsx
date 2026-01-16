@@ -3,8 +3,6 @@ import { pokemonCards } from "@/data/pokemonCards";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 
-const trendingCards = pokemonCards.filter((card) => card.trending);
-
 const typeColors: Record<string, string> = {
   fire: "bg-type-fire/20 text-type-fire border-type-fire/30",
   water: "bg-type-water/20 text-type-water border-type-water/30",
@@ -14,8 +12,13 @@ const typeColors: Record<string, string> = {
   dragon: "bg-type-dragon/20 text-type-dragon border-type-dragon/30",
 };
 
-export const TrendingCards = () => {
+interface TrendingCardsProps {
+  limit?: number;
+}
+
+export const TrendingCards = ({ limit }: TrendingCardsProps = {}) => {
   const navigate = useNavigate();
+  const trendingCards = pokemonCards.filter((card) => card.trending).slice(0, limit);
 
   return (
     <section className="py-8 sm:py-10 border-b border-border/30">

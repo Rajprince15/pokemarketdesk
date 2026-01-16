@@ -45,6 +45,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     const root = window.document.documentElement;
     
+    // Add transitioning class to prevent jarring transitions
+    root.classList.add('theme-transitioning');
+    
     // Remove both classes first
     root.classList.remove('light', 'dark');
     
@@ -64,6 +67,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       meta.content = theme === 'dark' ? '#0A0A0A' : '#F5F5F5';
       document.head.appendChild(meta);
     }
+    
+    // Remove transitioning class after theme is applied (next frame)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        root.classList.remove('theme-transitioning');
+      });
+    });
   }, [theme]);
 
   const toggleTheme = () => {

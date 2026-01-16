@@ -1,4 +1,4 @@
-import { Search, Menu, Star, TrendingUp, Zap, User, LogOut, Newspaper, Target, Sparkles, X } from "lucide-react";
+import { Search, Menu, Star, TrendingUp, Layers, User, LogOut, Newspaper, Target, Sparkles, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
@@ -44,11 +44,12 @@ export const Header = () => {
       <div className="container flex h-16 items-center justify-between gap-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-all duration-300 hover:scale-105">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg hover:shadow-xl transition-all duration-300 hover:rotate-3">
-            <Zap className="h-5 w-5 text-white" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg hover:shadow-xl transition-all duration-300 hover:rotate-3 relative">
+            <Layers className="h-5 w-5 text-white relative z-10" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 rounded-xl blur-md"></div>
           </div>
           <span className="text-xl font-bold tracking-tight hidden sm:block">
-            Poke<span className="text-gradient-primary">Market</span>
+            Poke<span className="text-gradient-primary">Deck</span>
           </span>
         </Link>
 
@@ -156,11 +157,12 @@ export const Header = () => {
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-2">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent">
-                    <Zap className="h-5 w-5 text-primary-foreground" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-accent relative">
+                    <Layers className="h-5 w-5 text-primary-foreground relative z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 rounded-lg blur-sm"></div>
                   </div>
                   <span className="text-xl font-bold tracking-tight">
-                    Poke<span className="text-primary">Market</span>
+                    Poke<span className="text-primary">Deck</span>
                   </span>
                 </SheetTitle>
               </SheetHeader>

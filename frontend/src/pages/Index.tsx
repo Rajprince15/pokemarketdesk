@@ -20,7 +20,7 @@ const Index = () => {
 
         {/* Main Content Sections with Optimized Spacing */}
         <MarketStats />
-        <TrendingCards />
+        <TrendingCards limit={5} />
        
         <CardTable />
       </main>

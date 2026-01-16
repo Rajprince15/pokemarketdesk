@@ -1,4 +1,4 @@
-import { Zap, Mail, Phone, MapPin, Twitter, Github, Youtube, MessageCircle } from "lucide-react";
+import { Layers, Mail, Phone, MapPin, Twitter, Github, Youtube, MessageCircle } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 export const Footer = () => {
@@ -11,11 +11,12 @@ export const Footer = () => {
           {/* Brand & Description */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg hover:scale-110 hover:rotate-6 transition-all duration-300">
-                <Zap className="h-5 w-5 text-white" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg hover:scale-110 hover:rotate-6 transition-all duration-300 relative">
+                <Layers className="h-5 w-5 text-white relative z-10" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 rounded-xl blur-md"></div>
               </div>
               <span className="text-lg sm:text-xl font-bold tracking-tight">
-                Poke<span className="text-gradient-primary">Market</span>
+                Poke<span className="text-gradient-primary">Deck</span>
               </span>
             </div>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
@@ -91,7 +92,7 @@ export const Footer = () => {
         <Separator className="my-6 sm:my-8 bg-border/50" />
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-muted-foreground">
-          <p>© {currentYear} PokeMart. All rights reserved.</p>
+          <p>© {currentYear} PokeDeck. All rights reserved.</p>
           <div className="flex items-center gap-4 sm:gap-6 flex-wrap justify-center">
             <a href="#" className="hover:text-primary transition-colors hover:underline">Privacy Policy</a>
             <a href="#" className="hover:text-primary transition-colors hover:underline">Terms of Service</a>

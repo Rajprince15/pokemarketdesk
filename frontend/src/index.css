@@ -145,6 +145,16 @@
     transition: background-color 0.3s ease, color 0.3s ease;
   }
 
+  /* Smooth transitions for all theme-aware elements */
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  /* Remove transitions during theme change for instant update */
+  .theme-transitioning * {
+    transition: none !important;
+  }
+
   @keyframes gradient-shift {
     0%, 100% {
       opacity: 1;
@@ -152,6 +162,19 @@
     50% {
       opacity: 0.8;
     }
+  }
+
+  @keyframes grain {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -5%); }
+    20% { transform: translate(-10%, 5%); }
+    30% { transform: translate(5%, -10%); }
+    40% { transform: translate(-5%, 15%); }
+    50% { transform: translate(-10%, 5%); }
+    60% { transform: translate(15%, 0); }
+    70% { transform: translate(0, 10%); }
+    80% { transform: translate(-15%, 0); }
+    90% { transform: translate(10%, 5%); }
   }
 }
 
@@ -272,6 +295,87 @@
 
   .magazine-featured {
     @apply col-span-full md:col-span-2 lg:col-span-3 row-span-1 md:row-span-2;
+  }
+
+  /* Interactive Animations */
+  .animate-scale-in {
+    animation: scale-in 0.3s ease-out;
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Button Press Feedback */
+  .button-press {
+    @apply active:scale-95 transition-transform duration-100;
+  }
+
+  /* Skeleton Loading Animation */
+  .skeleton {
+    @apply animate-pulse bg-gradient-to-r from-muted via-muted-foreground/10 to-muted;
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Modal/Dialog Animations */
+  .modal-enter {
+    animation: modal-enter 0.3s ease-out;
+  }
+
+  @keyframes modal-enter {
+    from {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Scroll-triggered Animations */
+  .scroll-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Toast Notification Animation */
+  .toast-enter {
+    animation: toast-enter 0.3s ease-out;
+  }
+
+  @keyframes toast-enter {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
 

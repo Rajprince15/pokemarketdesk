@@ -27,7 +27,7 @@ export const pokemonCards: PokemonCard[] = [
     change7d: 12.8,
     volume24h: 125000,
     marketCap: 4250000,
-    image: "https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/series/swsh3/20/",
+    image: "https://i.pinimg.com/736x/35/dd/12/35dd12624663346ae331a9a88baa9c7c.jpg",
     trending: true,
   },
   {
@@ -42,7 +42,7 @@ export const pokemonCards: PokemonCard[] = [
     change7d: 8.4,
     volume24h: 89000,
     marketCap: 3125000,
-    image: "https://images.pokemontcg.io/swsh4/188_hires.png",
+    image: "https://tcgplayer-cdn.tcgplayer.com/product/284283_in_1000x1000.jpg",
     trending: true,
   },
   {
