@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Watchlist from "./pages/Watchlist";
+import News from "./pages/News";
+import AllCards from "./pages/AllCards";
+import Predictions from "./pages/Predictions";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +22,10 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/cards" element={<AllCards />} />
+            <Route path="/watchlist" element={<Watchlist />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/predictions" element={<Predictions />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
