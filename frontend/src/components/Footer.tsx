@@ -1,8 +1,10 @@
 import { Layers, Mail, Phone, MapPin, Twitter, Github, Youtube, MessageCircle } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { theme } = useTheme();
 
   return (
     <footer className="glass border-t border-border/50 mt-12 relative z-10">
@@ -11,7 +13,11 @@ export const Footer = () => {
           {/* Brand & Description */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-
+              <img 
+                src={theme === 'dark' ? '/blacklogo.jpeg' : '/whitelogo.jpeg'}
+                alt="PokeDeck Logo" 
+                className="h-8 w-auto object-contain"
+              />
               <span className="text-lg sm:text-xl font-bold tracking-tight">
                 Poke<span className="text-gradient-primary">Deck</span>
               </span>

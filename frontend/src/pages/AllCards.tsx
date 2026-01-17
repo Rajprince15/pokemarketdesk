@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Search, Filter, X, ArrowLeft, Star, Sparkles } from "lucide-react";
@@ -6,7 +6,7 @@ import { pokemonCards, PokemonCard } from "@/data/pokemonCards";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   Select,
   SelectContent,
@@ -19,11 +19,20 @@ import { useAuth } from "@/contexts/AuthContext";
 type SortOption = "rank" | "price-high" | "price-low" | "change24h" | "change7d" | "volume";
 
 const AllCards = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "");
   const [selectedType, setSelectedType] = useState<string>("all");
   const [selectedRarity, setSelectedRarity] = useState<string>("all");
   const [sortBy, setSortBy] = useState<SortOption>("rank");
   const { toggleWatchlist, isInWatchlist } = useAuth();
+
+  // Update search query when URL params change
+  useEffect(() => {
+    const urlSearch = searchParams.get("search");
+    if (urlSearch) {
+      setSearchQuery(urlSearch);
+    }
+  }, [searchParams]);
 
   // Get unique types and rarities
   const types = ["all", ...new Set(pokemonCards.map((card) => card.type))];
@@ -65,6 +74,7 @@ const AllCards = () => {
     setSelectedType("all");
     setSelectedRarity("all");
     setSearchQuery("");
+    setSearchParams({}); // Clear URL params
   };
 
   const typeColors: Record<string, string> = {

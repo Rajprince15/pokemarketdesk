@@ -1,7 +1,6 @@
 import { Flame, TrendingUp } from "lucide-react";
 import { pokemonCards } from "@/data/pokemonCards";
 import { Badge } from "@/components/ui/badge";
-import { useNavigate } from "react-router-dom";
 
 const typeColors: Record<string, string> = {
   fire: "bg-type-fire/20 text-type-fire border-type-fire/30",
@@ -17,7 +16,6 @@ interface TrendingCardsProps {
 }
 
 export const TrendingCards = ({ limit }: TrendingCardsProps = {}) => {
-  const navigate = useNavigate();
   const trendingCards = pokemonCards.filter((card) => card.trending).slice(0, limit);
 
   return (
@@ -39,9 +37,8 @@ export const TrendingCards = ({ limit }: TrendingCardsProps = {}) => {
           {trendingCards.map((card, index) => (
             <div
               key={card.id}
-              className="group relative overflow-hidden rounded-xl bg-gradient-card border border-border/50 p-3 sm:p-4 hover:border-primary/50 transition-all duration-300 cursor-pointer animate-fade-in hover:shadow-2xl hover:shadow-primary/10 hover:scale-[1.03] hover:-translate-y-1 touch-manipulation"
+              className="group relative overflow-hidden rounded-xl bg-gradient-card border border-border/50 p-3 sm:p-4 hover:border-primary/50 transition-all duration-300 animate-fade-in hover:shadow-2xl hover:shadow-primary/10 hover:scale-[1.03] hover:-translate-y-1 touch-manipulation"
               style={{ animationDelay: `${index * 100}ms` }}
-              onClick={() => navigate(`/card/${card.id}`)}
             >
               {/* Rank Badge */}
               <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10">

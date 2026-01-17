@@ -12,35 +12,86 @@ interface User {
 interface AuthContextType {
   user: User | null;
   isLoggedIn: boolean;
-  login: () => void;
+  login: (email: string, password: string) => void;
   logout: () => void;
+  signup: (name: string, email: string, password: string) => void;
   toggleWatchlist: (cardId: number) => void;
   isInWatchlist: (cardId: number) => boolean;
 }
 
-const dummyUser: User = {
-  id: "1",
-  name: "Ash Ketchum",
-  email: "ash@pokemon.trainer",
-  avatar: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-  joinDate: "2024-01-15",
-  watchlist: [1, 3, 4, 7], // Card IDs in watchlist
+// Demo users database
+const demoUsers: Record<string, { password: string; user: User }> = {
+  "ash@pokemon.trainer": {
+    password: "pikachu123",
+    user: {
+      id: "1",
+      name: "Ash Ketchum",
+      email: "ash@pokemon.trainer",
+      avatar: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+      joinDate: "2024-01-15",
+      watchlist: [1, 3, 4, 7],
+    },
+  },
+  "misty@pokemon.trainer": {
+    password: "starmie456",
+    user: {
+      id: "2",
+      name: "Misty",
+      email: "misty@pokemon.trainer",
+      avatar: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/120.png",
+      joinDate: "2024-01-20",
+      watchlist: [2, 5, 8],
+    },
+  },
+  "brock@pokemon.trainer": {
+    password: "onix789",
+    user: {
+      id: "3",
+      name: "Brock",
+      email: "brock@pokemon.trainer",
+      avatar: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png",
+      joinDate: "2024-01-25",
+      watchlist: [4, 6, 9],
+    },
+  },
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(dummyUser); // Start logged in for demo
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [user, setUser] = useState<User | null>(null); // Start logged out
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const login = () => {
-    setUser(dummyUser);
-    setIsLoggedIn(true);
+  const login = (email: string, password: string) => {
+    const userRecord = demoUsers[email];
+    if (userRecord && userRecord.password === password) {
+      setUser(userRecord.user);
+      setIsLoggedIn(true);
+    }
   };
 
   const logout = () => {
     setUser(null);
     setIsLoggedIn(false);
+  };
+
+  const signup = (name: string, email: string, password: string) => {
+    // Create new user
+    const newUser: User = {
+      id: Date.now().toString(),
+      name,
+      email,
+      avatar: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png", // Ditto avatar
+      joinDate: new Date().toISOString().split("T")[0],
+      watchlist: [],
+    };
+
+    // Add to demo users (in real app, this would be API call)
+    demoUsers[email] = { password, user: newUser };
+
+    // Auto login after signup
+    setUser(newUser);
+    setIsLoggedIn(true);
   };
 
   const toggleWatchlist = (cardId: number) => {
@@ -63,7 +114,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isLoggedIn, login, logout, toggleWatchlist, isInWatchlist }}
+      value={{ user, isLoggedIn, login, logout, signup, toggleWatchlist, isInWatchlist }}
     >
       {children}
     </AuthContext.Provider>

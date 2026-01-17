@@ -23,11 +23,12 @@ import {
 } from "@/components/ui/sheet";
 
 export const Header = () => {
-  const { user, isLoggedIn, login, logout } = useAuth();
+  const { user, isLoggedIn, logout } = useAuth();
   const { theme } = useTheme();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +37,23 @@ export const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/cards?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+    }
+  };
+
+  const handleMobileSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/cards?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+      setMobileMenuOpen(false);
+    }
+  };
 
   return (
     <header className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
@@ -94,13 +112,15 @@ export const Header = () => {
 
         {/* Search & Actions */}
         <div className="flex items-center gap-2">
-          <div className="relative hidden sm:block">
+          <form onSubmit={handleSearch} className="relative hidden sm:block">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search cards..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="w-48 lg:w-64 pl-9 glass border-border/50 focus:border-primary/50 focus:ring-primary/20 transition-all duration-300 focus:w-56 lg:focus:w-72"
             />
-          </div>
+          </form>
 
           {/* Theme Toggle */}
           <ThemeToggle />
@@ -145,7 +165,7 @@ export const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button size="sm" className="hidden sm:flex" onClick={login}>
+            <Button size="sm" className="hidden sm:flex" onClick={() => navigate('/login')}>
               Sign In
             </Button>
           )}
@@ -172,15 +192,17 @@ export const Header = () => {
               </SheetHeader>
 
               {/* Mobile Search */}
-              <div className="mt-6 mb-6">
+              <form onSubmit={handleMobileSearch} className="mt-6 mb-6">
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   <Input
                     placeholder="Search cards..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     className="pl-9 glass border-border/50"
                   />
                 </div>
-              </div>
+              </form>
 
               {/* Theme Toggle in Mobile */}
               <div className="mb-4 flex items-center justify-between px-4">
@@ -267,7 +289,7 @@ export const Header = () => {
                   <Button 
                     className="w-full" 
                     onClick={() => {
-                      login();
+                      navigate('/login');
                       setMobileMenuOpen(false);
                     }}
                   >

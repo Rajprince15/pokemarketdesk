@@ -4,7 +4,6 @@ import { pokemonCards, PokemonCard } from "@/data/pokemonCards";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -50,7 +49,6 @@ export const CardTable = () => {
   const [sortField, setSortField] = useState<SortField>("rank");
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
   const { toggleWatchlist, isInWatchlist } = useAuth();
-  const navigate = useNavigate();
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -162,9 +160,8 @@ export const CardTable = () => {
                 {sortedCards.map((card, index) => (
                   <TableRow
                     key={card.id}
-                    className="group hover:bg-secondary/50 border-border/30 cursor-pointer animate-fade-in transition-all duration-200 hover:shadow-md touch-manipulation"
+                    className="group hover:bg-secondary/50 border-border/30 animate-fade-in transition-all duration-200 hover:shadow-md touch-manipulation"
                     style={{ animationDelay: `${index * 50}ms` }}
-                    onClick={() => navigate(`/card/${card.id}`)}
                   >
                     <TableCell className="font-medium text-muted-foreground text-xs sm:text-sm">
                       {card.rank}
