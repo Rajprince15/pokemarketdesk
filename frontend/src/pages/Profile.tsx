@@ -44,9 +44,9 @@ const Profile = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-gradient-hero">
+      <div className="min-h-screen bg-gradient-hero bg-gradient-mesh grain relative">
         <Header />
-        <main className="container py-16">
+        <main className="container py-16 px-4 relative z-10">
           <div className="max-w-md mx-auto">
             <h1 className="text-3xl font-bold text-center mb-8">Welcome Back</h1>
 
@@ -57,7 +57,7 @@ const Profile = () => {
               </TabsList>
 
               <TabsContent value="login">
-                <Card>
+                <Card className="glass border-border/50">
                   <CardHeader>
                     <CardTitle>Sign In</CardTitle>
                     <CardDescription>
@@ -104,7 +104,7 @@ const Profile = () => {
               </TabsContent>
 
               <TabsContent value="register">
-                <Card>
+                <Card className="glass border-border/50">
                   <CardHeader>
                     <CardTitle>Create Account</CardTitle>
                     <CardDescription>
@@ -186,11 +186,11 @@ const Profile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-hero">
+    <div className="min-h-screen bg-gradient-hero bg-gradient-mesh grain relative">
       <Header />
-      <main className="container py-8">
+      <main className="container py-8 px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="rounded-xl border border-border/50 bg-card/50 p-6 sm:p-8 mb-8">
+          <div className="glass rounded-2xl border border-border/50 p-6 sm:p-8 mb-8 hover:border-primary/30 transition-all duration-300">
             <div className="flex flex-col sm:flex-row items-center gap-6">
               <Avatar className="h-24 w-24 border-4 border-primary/50">
                 <AvatarImage src={user.avatar} alt={user.name} />
@@ -219,7 +219,7 @@ const Profile = () => {
 
           <div className="grid sm:grid-cols-3 gap-4 mb-8">
             <Card
-              className="cursor-pointer hover:border-primary/50 transition-colors"
+              className="glass cursor-pointer hover:border-primary/50 transition-all duration-300 card-hover"
               onClick={() => navigate('/collection')}
             >
               <CardHeader className="pb-3">
@@ -235,7 +235,7 @@ const Profile = () => {
             </Card>
 
             <Card
-              className="cursor-pointer hover:border-primary/50 transition-colors"
+              className="glass cursor-pointer hover:border-primary/50 transition-all duration-300 card-hover"
               onClick={() => navigate('/watchlist')}
             >
               <CardHeader className="pb-3">
@@ -251,7 +251,7 @@ const Profile = () => {
             </Card>
 
             <Card
-              className="cursor-pointer hover:border-primary/50 transition-colors"
+              className="glass cursor-pointer hover:border-primary/50 transition-all duration-300 card-hover"
               onClick={() => navigate('/orders')}
             >
               <CardHeader className="pb-3">
@@ -268,7 +268,7 @@ const Profile = () => {
           </div>
 
           <div className="grid gap-6">
-            <Card>
+            <Card className="glass border-border/50">
               <CardHeader>
                 <CardTitle>Quick Actions</CardTitle>
                 <CardDescription>

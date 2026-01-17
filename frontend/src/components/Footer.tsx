@@ -11,10 +11,7 @@ export const Footer = () => {
           {/* Brand & Description */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary via-accent to-destructive shadow-lg hover:scale-110 hover:rotate-6 transition-all duration-300 relative">
-                <Layers className="h-5 w-5 text-white relative z-10" />
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/50 to-accent/50 rounded-xl blur-md"></div>
-              </div>
+
               <span className="text-lg sm:text-xl font-bold tracking-tight">
                 Poke<span className="text-gradient-primary">Deck</span>
               </span>
